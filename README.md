@@ -54,26 +54,18 @@ import { UIHtml } from "../dist/ui-html/ui-html.js";
 // Instantiating components
 const button = UIBuilder.button({ text: "Click Here" });
 const label = UIBuilder.label({ label: "Value: 50" });
-const range = UIBuilder.custom({ 
-    tag: "input", 
-    attribute: { type: "range", min: 0, max: 100, value: 50 } 
-});
+const range = UIBuilder.custom({ tag: "input", attribute: { type: "range", min: 0, max: 100, value: 50 } });
 
-// Accessing Body and appending elements
+//  Body appending elements
 const body = UIBuilder.body();
 body.append(button);
 body.append(label);
 body.append(range);
 
 // Managing events bound to elements
-UIBuilder.event(button).add("click", () => {
-    document.body.style.background = "#1a1a1a";
-});
+UIBuilder.event(button).add("click", () => document.body.style.background = "#1a1a1a");
 
-UIBuilder.event(range).add("input", () => {
-    const inputElement = UIHtml.parseUIElement(range) as HTMLInputElement;
-    label.label(`Value: ${inputElement.value}`);
-});
+UIBuilder.event(range).add("input", () => label.label(UIHtml.parseUIElement(range).value));
 ```
 
 ---
