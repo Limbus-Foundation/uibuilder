@@ -25,7 +25,7 @@ HTML Element Wrapper for JavaScript / TypeScript.
 | `head()` | `{void}` | Return a reference to the `<head>` via `UIHead`. |
 | `html()` | `{void}` | Return a reference to `UIHtml` utility helpers. |
 
----
+--- 
 
 # USAGE
 
@@ -49,7 +49,6 @@ HTML Element Wrapper for JavaScript / TypeScript.
 
 ```typescript
 import { UIBuilder } from "../dist/ui-builder/ui-builder.js";
-import { UIHtml } from "../dist/ui-html/ui-html.js";
 
 // Instantiating components
 const button = UIBuilder.button({ text: "Click Here" });
@@ -64,8 +63,7 @@ body.append(range);
 
 // Managing events bound to elements
 UIBuilder.event(button).add("click", () => document.body.style.background = "#1a1a1a");
-
-UIBuilder.event(range).add("input", () => label.label(UIHtml.parseUIElement(range).value));
+UIBuilder.event(range).add("input", () => label.label(UIBuilder.html().parseUIElement(range).value)); 
 ```
 
 ---

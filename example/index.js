@@ -2,7 +2,6 @@
 // UI BUILDER EXAMPLE : 
 
 import { UIBuilder } from "../dist/ui-builder/ui-builder.js";
-import { UIHtml } from "../dist/ui-html/ui-html.js";
 
 const button = UIBuilder.button({ text : "hello world"});
 
@@ -17,9 +16,9 @@ body.append(label);
 body.append(range);   
     
 UIBuilder.event(button).add("click", () => document.body.style.background = "red"); 
-UIBuilder.event(range).add("input", () => label.label(UIHtml.parseUIElement(range).value)); 
+UIBuilder.event(range).add("input", () => label.label(UIBuilder.html().parseUIElement(range).value)); 
 
 
 
 
- 
+  
