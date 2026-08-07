@@ -1,5 +1,5 @@
 {
-  "name": "@limbusfoundation/htmlbake",
+  "name": "@limbusfoundation/uibuilder",
   "types": "dist/uibuilder.d.ts",
   "version": "1.1.0",
   "description": "Html Forge",
