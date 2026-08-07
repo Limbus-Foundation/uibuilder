@@ -1,0 +1,36 @@
+{
+  "name": "@limbusfoundation/htmlbake",
+  "types": "dist/uibuilder.d.ts",
+  "version": "1.1.0",
+  "description": "Html Forge",
+  "publishConfig": {
+        "access": "public"
+  },
+  "keywords": [
+    "uibuilder",
+    "bake",
+    "html-forge",
+    "html"
+  ],
+  "homepage": "https://github.com/Limbus-Foundation/uibuilder#readme",
+  "bugs": {
+    "url": "https://github.com/Limbus-Foundation/uibuilder/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Limbus-Foundation/uibuilder.git"
+  },
+  "license": "MIT",
+  "author": "Limbus Foundation",
+  "type": "commonjs",
+  "main": "./dist/ui-html/ui-html.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "node example/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^7.0.2"
+  }
+}
