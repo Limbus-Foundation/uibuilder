@@ -1,34 +1,29 @@
 // (c) 2026 Rhyan Eduardo. MIT 
-import { UIBody } from "../ui-body/ui-body.js";
-import { UIHead } from './../ui-head/ui-head.js';
-import { UIEvent } from './../ui-event/ui-event.js';
-import { UIButton } from "../ui-button/ui-button.js";
-import { UICustom } from "../ui-custom/ui-custom.js";
-import { UIGroup } from '../ui-group/ui-group.js';
-import { UIHtml } from "../ui-html/ui-html.js";
-import { UIIcon } from "../ui-icon/ui-icon.js";
-import { UIIconButton } from "../ui-icon-button/ui-icon-button.js";
-import { UIImage } from "../ui-image/ui-image.js";
-import { UILabel } from "../ui-label/ui-label.js";
-import { UIPanel } from "../ui-panel/ui-panel.js";
-import { UISlider } from './../ui-slider/ui-slider.js';
-import { UITextField } from './../ui-text-field/ui-text-field.js';
+import { UIBody } from "../module/ui-body/ui-body.js";
+import { UIHead } from '../module/ui-head/ui-head.js';
+import { UIEvent } from '../module/ui-event/ui-event.js';
+import { UIButton } from "../module/ui-button/ui-button.js";
+import { UICustom } from "../module/ui-custom/ui-custom.js";
+import { UIGroup } from '../module/ui-group/ui-group.js';
+import { UIHtml } from "../module/ui-html/ui-html.js";
+import { UIIcon } from "../module/ui-icon/ui-icon.js";
+import { UIIconButton } from "../module/ui-icon-button/ui-icon-button.js";
+import { UIImage } from "../module/ui-image/ui-image.js";
+import { UILabel } from "../module/ui-label/ui-label.js";
+import { UIPanel } from "../module/ui-panel/ui-panel.js";
+import { UISlider } from '../module/ui-slider/ui-slider.js';
+import { UITextField } from '../module/ui-text-field/ui-text-field.js';
+import { UIBlend } from "../module/ui-blend/ui-blend.js";
 /**
  * ### UIBuilder
  *
- * Classe fabril (*Factory*) estática responsável pela criação rápida e centralizada
- * de componentes de interface visual e acesso aos utilitários globais de DOM/Eventos.
+ * HTMLElement Wrapper
  *
  * @example
  * ```ts
  * const button = UIBuilder.button({ label: "Enviar" });
  * ```
- *
- * @see {@link UIButton}
- * @see {@link UITextField}
- *
  * @author Limbus Foundation OSG.
- * @version 1.0.0
  * @license MIT
  */
 export class UIBuilder {
@@ -333,6 +328,34 @@ export class UIBuilder {
      * @static
      */
     static event = (element) => new UIEvent(element);
+    /**
+     *
+     * #### UIComponent
+     *
+     * Return a reference to the `UIComponent`.
+     *
+     * @param props
+     *
+     * @returns `UIComponent`.
+     *
+     * @see {@link UIComponent}
+     * @public
+     */
+    static component = (build) => build;
+    /**
+     *
+     * #### UIBlend
+     *
+     * Return a reference to the `UIBlend`.
+     *
+     * @param UIElementList
+     *
+     * @returns `UIElementList`.
+     *
+     * @see {@link UIBlend}
+     * @public
+     */
+    static blend = (...elements) => new UIBlend(...elements);
     /**
      *
      * #### UIBody

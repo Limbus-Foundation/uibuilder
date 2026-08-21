@@ -21,4 +21,23 @@ UIBuilder.event(range).add("input", () => label.label(UIBuilder.html().parseUIEl
 
 
 
-  
+const counter = UIBuilder.component((text,image) => {
+
+    const label = UIBuilder.label({ label: text });
+    const button = UIBuilder.button({ text: "Adicionar" });
+    const img = UIBuilder.image({ src: image });
+
+    let count = 0;
+
+    UIBuilder.event(button).add("click", () => {
+        count++;
+        label.label(String(count));
+    });
+
+    return UIBuilder.blend(label, button,img); 
+});
+
+body.append(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
+body.append(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
+
+// console.log(counter("Click para adicionar ao contador")); 

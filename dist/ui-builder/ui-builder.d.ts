@@ -1,34 +1,29 @@
-import { UIBody } from "../ui-body/ui-body.js";
-import { UIHead } from './../ui-head/ui-head.js';
-import { UIEvent } from './../ui-event/ui-event.js';
-import { IUIButton, UIButton } from "../ui-button/ui-button.js";
-import { IUICustom, UICustom } from "../ui-custom/ui-custom.js";
-import { IUIGroup, UIGroup } from '../ui-group/ui-group.js';
-import { UIHtml } from "../ui-html/ui-html.js";
-import { IUIcon, UIIcon } from "../ui-icon/ui-icon.js";
-import { IUIIconButton, UIIconButton } from "../ui-icon-button/ui-icon-button.js";
-import { IUIImage, UIImage } from "../ui-image/ui-image.js";
-import { UILabel, IUILabel } from "../ui-label/ui-label.js";
-import { IUIPanel, UIPanel } from "../ui-panel/ui-panel.js";
-import { IUISlider, UISlider } from './../ui-slider/ui-slider.js';
-import { IUITextField, UITextField } from './../ui-text-field/ui-text-field.js';
-import { UIElement } from "../ui-element/ui-element.js";
+import { UIBody } from "../module/ui-body/ui-body.js";
+import { UIHead } from '../module/ui-head/ui-head.js';
+import { UIEvent } from '../module/ui-event/ui-event.js';
+import { IUIButton, UIButton } from "../module/ui-button/ui-button.js";
+import { IUICustom, UICustom } from "../module/ui-custom/ui-custom.js";
+import { IUIGroup, UIGroup } from '../module/ui-group/ui-group.js';
+import { UIHtml } from "../module/ui-html/ui-html.js";
+import { IUIcon, UIIcon } from "../module/ui-icon/ui-icon.js";
+import { IUIIconButton, UIIconButton } from "../module/ui-icon-button/ui-icon-button.js";
+import { IUIImage, UIImage } from "../module/ui-image/ui-image.js";
+import { UILabel, IUILabel } from "../module/ui-label/ui-label.js";
+import { IUIPanel, UIPanel } from "../module/ui-panel/ui-panel.js";
+import { IUISlider, UISlider } from '../module/ui-slider/ui-slider.js';
+import { IUITextField, UITextField } from '../module/ui-text-field/ui-text-field.js';
+import { UIElement } from "../module/ui-element/ui-element.js";
+import { UIBlend } from "../module/ui-blend/ui-blend.js";
 /**
  * ### UIBuilder
  *
- * Classe fabril (*Factory*) estática responsável pela criação rápida e centralizada
- * de componentes de interface visual e acesso aos utilitários globais de DOM/Eventos.
+ * HTMLElement Wrapper
  *
  * @example
  * ```ts
  * const button = UIBuilder.button({ label: "Enviar" });
  * ```
- *
- * @see {@link UIButton}
- * @see {@link UITextField}
- *
  * @author Limbus Foundation OSG.
- * @version 1.0.0
  * @license MIT
  */
 export declare class UIBuilder {
@@ -333,6 +328,34 @@ export declare class UIBuilder {
      * @static
      */
     static event: (element: UIElement) => UIEvent;
+    /**
+     *
+     * #### UIComponent
+     *
+     * Return a reference to the `UIComponent`.
+     *
+     * @param props
+     *
+     * @returns `UIComponent`.
+     *
+     * @see {@link UIComponent}
+     * @public
+     */
+    static component: <T>(build: (...props: any[]) => T) => (...props: any[]) => T;
+    /**
+     *
+     * #### UIBlend
+     *
+     * Return a reference to the `UIBlend`.
+     *
+     * @param UIElementList
+     *
+     * @returns `UIElementList`.
+     *
+     * @see {@link UIBlend}
+     * @public
+     */
+    static blend: (...elements: UIElement[]) => UIBlend;
     /**
      *
      * #### UIBody
