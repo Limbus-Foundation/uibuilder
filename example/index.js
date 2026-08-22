@@ -18,9 +18,6 @@ body.append(range);
 UIBuilder.event(button).add("click", () => document.body.style.background = "red"); 
 UIBuilder.event(range).add("input", () => label.label(UIBuilder.html().parseUIElement(range).value)); 
 
-
-
-
 const counter = UIBuilder.component((text,image) => {
 
     const label = UIBuilder.label({ label: text });

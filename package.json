@@ -1,6 +1,5 @@
 {
   "name": "@limbusfoundation/uibuilder",
-  "types": "dist/uibuilder.d.ts",
   "version": "1.3.0",
   "description": "UI Builder is a library for building user interfaces using HTML elements. It provides a set of tools and components to create dynamic and interactive web applications.",
   "publishConfig": {
@@ -23,7 +22,8 @@
   "license": "MIT",
   "author": "Limbus Foundation",
   "type": "commonjs",
-  "main": "./dist/ui-html/ui-html.js",
+  "types": "./dist/ui-builder/ui-builder.d.ts",
+  "main": "./dist/ui-builder/ui-builder.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
