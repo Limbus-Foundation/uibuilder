@@ -1,5 +1,3 @@
-import { UIBody } from "../module/ui-body/ui-body.js";
-import { UIHead } from '../module/ui-head/ui-head.js';
 import { UIEvent } from '../module/ui-event/ui-event.js';
 import { IUIButton, UIButton } from "../module/ui-button/ui-button.js";
 import { IUICustom, UICustom } from "../module/ui-custom/ui-custom.js";
@@ -369,7 +367,10 @@ export declare class UIBuilder {
      * @public
      * @static
      */
-    static body: () => typeof UIBody;
+    static body: {
+        append: (element: UIElement | UIBlend) => import("../module/ui-append/ui-append.js").UIAppend;
+        prepend: (element: UIElement | UIBlend) => import("../module/ui-append/ui-append.js").UIAppend;
+    };
     /**
      *
      * #### UIBody
@@ -383,7 +384,9 @@ export declare class UIBuilder {
      * @public
      * @static
      */
-    static head: () => typeof UIHead;
+    static head: {
+        append: (element: UIElement) => HTMLElement;
+    };
     /**
      *
      * ####  UIHtml

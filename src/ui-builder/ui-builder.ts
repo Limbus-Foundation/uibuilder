@@ -358,7 +358,7 @@ export class UIBuilder {
      * @see {@link UIComponent}
      * @public
      */
-    public static component = <T>(build: (...props: any[]) => T): (...props: any[]) => T => build;
+    public static component = <T>(build: (...props: any[]) => T) : (...props: any[]) => T => build;
 
     /**
      * 
@@ -389,7 +389,10 @@ export class UIBuilder {
      * @public
      * @static
      */
-    public static body = (): typeof UIBody => UIBody;
+    public static body = {
+        append : UIBody.append,
+        prepend : UIBody.prepend
+    };
 
     /**
      * 
@@ -404,7 +407,9 @@ export class UIBuilder {
      * @public
      * @static
      */
-    public static head = (): typeof UIHead => UIHead;
+    public static head = {
+        append : UIHead.append,
+    };
 
     /**
      * 

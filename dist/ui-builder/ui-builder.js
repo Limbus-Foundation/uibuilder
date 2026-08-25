@@ -370,7 +370,10 @@ export class UIBuilder {
      * @public
      * @static
      */
-    static body = () => UIBody;
+    static body = {
+        append: UIBody.append,
+        prepend: UIBody.prepend
+    };
     /**
      *
      * #### UIBody
@@ -384,7 +387,9 @@ export class UIBuilder {
      * @public
      * @static
      */
-    static head = () => UIHead;
+    static head = {
+        append: UIHead.append,
+    };
     /**
      *
      * ####  UIHtml
