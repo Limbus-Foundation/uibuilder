@@ -4,11 +4,11 @@ export class UIAppend {
     constructor(parent, children, organization) {
         if (children instanceof UIBlend) {
             for (const element of children)
-                organization === "START" ? parent.appendChild(element.get()) : parent.prepend(element.get());
+                organization === "START" ? parent.prepend(element.get()) : parent.appendChild(element.get());
             return;
         }
         ;
-        organization === "START" ? parent.appendChild(children.get()) : parent.prepend(children.get());
+        organization === "START" ? parent.prepend(children.get()) : parent.appendChild(children.get());
     }
     ;
 }
