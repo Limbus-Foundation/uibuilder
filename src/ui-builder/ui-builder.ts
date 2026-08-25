@@ -408,9 +408,9 @@ export class UIBuilder {
 
     /**
      * 
-     * #### UIHtml
+     * ####  UIHtml
      * 
-     * Return a reference to the `UIHtml`.
+     * Return a reference to the `UIHtml`.  
      *
      * @returns `UIHtml`.
      * 
@@ -449,57 +449,3 @@ export class UIBuilder {
 
 
 
-/*
- * # 🚀 Título da Classe ou Função (Suporta Markdown)
- *
- * Esta é a **descrição principal**. Você pode usar formatação em *itálico*, 
- * **negrito**, `código inline` e listas:
- * - Item 1 da lista
- * - Item 2 da lista
- * 
- * ---
- * 
- * @template T - Descrição do tipo genérico recebido.
- * 
- * @param {string} id - [Apenas JS] Em TS o tipo `{string}` é opcional, mas pode usar.
- * @param option - Objeto principal de configurações.
- * @param option.title - Título exibido no componente.
- * @param [option.description="Sem descrição"] - Propriedade opcional com valor padrão.
- * @param option.payload - Dados genéricos do tipo T.
- * 
- * @returns Retorna a instância configurada ou `true` para sucesso.
- * 
- * @throws {TypeError} Disparado se o `id` for uma string vazia.
- * @throws {Error} Disparado se a conexão falhar.
- * 
- * @example
- * ### Exemplo de Uso Padrão
- * ```ts
- * const instance = new CustomComponent<string>("usr_123", {
- *     title: "Card",
- *     payload: "dados"
- * });
- * ```
- * 
- * @example
- * ### Exemplo Avançado
- * ```ts
- * const instance = new CustomComponent("usr_456", { title: "Admin" });
- * ```
- * 
- * @see {@link IUITextField} - Veja a interface relacionada no projeto.
- * @see {@link UITextField.clear} - Veja o método de limpar.
- * @see https://developer.mozilla.org - Documentação externa da MDN.
- * 
- * @deprecated Este método será removido na v2.0. Prefira usar `novoMetodo()`.
- * @experimental Recursos sujeitos a alterações sem aviso prévio.
- * 
- * @readonly
- * @public
- * @async
- * 
- * @author Rhyan Eduardo <contato@dominio.com>
- * @version 1.0.0
- * @since 0.5.0 - Disponível a partir desta versão.
- * @license MIT
- */

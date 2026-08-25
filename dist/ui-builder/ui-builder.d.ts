@@ -386,7 +386,7 @@ export declare class UIBuilder {
     static head: () => typeof UIHead;
     /**
      *
-     * #### UIHtml
+     * ####  UIHtml
      *
      * Return a reference to the `UIHtml`.
      *
