@@ -1,6 +1,8 @@
 
 // UI ICON BUTTON : 
 
+import { UIAppend } from "../ui-append/ui-append.js";
+import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
 
 export interface IUIIconButton {
@@ -67,7 +69,9 @@ export class UIIconButton {
     public removeAttribute = ( attribute : string ) : void => void (this.element.removeAttribute(attribute));
     public removeClassName = ( className : string ) : void => void ( this.element.classList.remove(className));
 
-    public append = (element: UIElement): void => this.element.append(element.get());
+    public append = (element: UIElement | UIBlend): UIAppend => new UIAppend(this.element, element,"END");
+    public prepend = (element: UIElement | UIBlend): UIAppend => new UIAppend(this.element, element,"START");
+
     public remove = (): void => this.element.remove();
     public get = (): HTMLElement => this.element;
 

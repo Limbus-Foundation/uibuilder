@@ -413,13 +413,15 @@ export class UIBuilder {
      * Return a reference to the `UIHtml`.
      *
      * @returns `UIHtml`.
-     *
+     * 
      * @see {@link UIHtml}
      * @see {@link UIHtml.parseUIElement} - convert an UIBuilder Element in a HTMLElement
      * @public
      * @static
      */
-    public static html = (): typeof UIHtml => UIHtml;
+    public static html = {
+        parseHTMLElement : UIHtml.parseUIElement
+    };
 
 
 };

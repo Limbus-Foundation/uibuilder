@@ -1,3 +1,5 @@
+import { UIAppend } from "../ui-append/ui-append.js";
+import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
 export interface IUIcon {
     id?: string;
@@ -35,7 +37,8 @@ export declare class UIIcon {
     attribute: (name: string, value: string) => void;
     removeAttribute: (attribute: string) => void;
     removeClassName: (className: string) => void;
-    append: (element: UIElement) => void;
+    append: (element: UIElement | UIBlend) => UIAppend;
+    prepend: (element: UIElement | UIBlend) => UIAppend;
     remove: () => void;
     clear: () => string;
     get: () => HTMLElement;

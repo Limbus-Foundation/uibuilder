@@ -1,4 +1,5 @@
 // UI ICON : 
+import { UIAppend } from "../ui-append/ui-append.js";
 ;
 /**
  *
@@ -43,7 +44,8 @@ export class UIIcon {
     attribute = (name, value) => this.element.setAttribute(name, value);
     removeAttribute = (attribute) => void (this.element.removeAttribute(attribute));
     removeClassName = (className) => void (this.element.classList.remove(className));
-    append = (element) => this.element.append(element.get());
+    append = (element) => new UIAppend(this.element, element, "END");
+    prepend = (element) => new UIAppend(this.element, element, "START");
     remove = () => this.element.remove();
     clear = () => (this.element.innerHTML = "");
     get = () => this.element;

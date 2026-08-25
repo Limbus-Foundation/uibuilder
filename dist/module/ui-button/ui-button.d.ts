@@ -1,3 +1,5 @@
+import { UIAppend } from "../ui-append/ui-append.js";
+import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
 export interface IUIButton {
     id?: string;
@@ -41,7 +43,8 @@ export declare class UIButton {
     removeClassName: (className: string) => void;
     text: (text: string) => void;
     label: (label: string) => void;
-    append: (element: UIElement) => void;
+    append: (element: UIElement | UIBlend) => UIAppend;
+    prepend: (element: UIElement | UIBlend) => UIAppend;
     remove: () => void;
     clear: () => string;
     get: () => HTMLElement;

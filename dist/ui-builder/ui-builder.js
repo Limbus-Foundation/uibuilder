@@ -398,7 +398,9 @@ export class UIBuilder {
      * @public
      * @static
      */
-    static html = () => UIHtml;
+    static html = {
+        parseHTMLElement: UIHtml.parseUIElement
+    };
 }
 ;
 /*

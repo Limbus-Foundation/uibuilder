@@ -1,4 +1,5 @@
 // UI BUTTON : 
+import { UIAppend } from "../ui-append/ui-append.js";
 ;
 /**
  *
@@ -51,7 +52,8 @@ export class UIButton {
     removeClassName = (className) => void (this.element.classList.remove(className));
     text = (text) => void (this.element.textContent = text);
     label = (label) => void (this.element.textContent = label);
-    append = (element) => this.element.append(element.get());
+    append = (element) => new UIAppend(this.element, element, "END");
+    prepend = (element) => new UIAppend(this.element, element, "START");
     remove = () => this.element.remove();
     clear = () => (this.element.innerHTML = "");
     get = () => this.element;

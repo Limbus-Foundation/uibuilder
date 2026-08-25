@@ -4,7 +4,6 @@ import { UIEvent } from '../module/ui-event/ui-event.js';
 import { IUIButton, UIButton } from "../module/ui-button/ui-button.js";
 import { IUICustom, UICustom } from "../module/ui-custom/ui-custom.js";
 import { IUIGroup, UIGroup } from '../module/ui-group/ui-group.js';
-import { UIHtml } from "../module/ui-html/ui-html.js";
 import { IUIcon, UIIcon } from "../module/ui-icon/ui-icon.js";
 import { IUIIconButton, UIIconButton } from "../module/ui-icon-button/ui-icon-button.js";
 import { IUIImage, UIImage } from "../module/ui-image/ui-image.js";
@@ -398,5 +397,7 @@ export declare class UIBuilder {
      * @public
      * @static
      */
-    static html: () => typeof UIHtml;
+    static html: {
+        parseHTMLElement: (element: UIElement) => HTMLElement;
+    };
 }
