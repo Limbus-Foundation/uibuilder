@@ -10,8 +10,10 @@ import { IUIPanel, UIPanel } from "../modules/ui-panel/ui-panel.js";
 import { IUISlider, UISlider } from '../modules/ui-slider/ui-slider.js';
 import { IUITextField, UITextField } from '../modules/ui-text-field/ui-text-field.js';
 import { UIElement } from "../modules/ui-element/ui-element.js";
+import { UIComponent } from "../modules/ui-component/ui-component.js";
 import { UIBlend } from "../modules/ui-blend/ui-blend.js";
 import { UIStyle, UIStyleProperties } from "../modules/ui-style/ui-style.js";
+import { UIStore } from "../modules/ui-store/ui-store.js";
 /**
  * ### UIBuilder
  *
@@ -339,7 +341,37 @@ export declare class UIBuilder {
      * @see {@link UIComponent}
      * @public
      */
-    static component: <T>(build: (...props: any[]) => T) => (...props: any[]) => T;
+    static component: typeof UIComponent.build;
+    /**
+     *
+     * #### UIRouter
+     *
+     * Return a reference to the `UIRouter`.
+     *
+     * @returns `UIRouter`.
+     *
+     * @see {@link UIRouter}
+     * @public
+     */
+    static router: {
+        route: (path: string, element: UIElement | UIBlend) => void;
+        navigate: (path: string) => void;
+        back: () => void;
+        forward: () => void;
+        init: () => void;
+    };
+    /**
+    *
+    * #### UIStore
+    *
+    * Return a reference to the `UIStore`.
+    *
+    * @returns `UIStore`.
+    *
+    * @see {@link UIStore}
+    * @public
+    */
+    static store: typeof UIStore;
     /**
      *
      * #### UIBlend
@@ -385,6 +417,24 @@ export declare class UIBuilder {
     static body: {
         render: (element: UIElement | UIBlend, organization?: import("../modules/ui-append/ui-append.js").UIAppendOrganization) => import("../modules/ui-append/ui-append.js").UIAppend;
         style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
+    };
+    /**
+     *
+     * #### UIWatcher
+     *
+     * Return a reference to `UIWatcher`.
+     *
+     * @returns `UIWatcher`.
+     *
+     * @see {@link UIWatcher}
+     * @see {@link UIWatcher.watch}
+     * @see {@link UIWatcher.unwatch}
+     * @public
+     * @static
+     */
+    static watcher: {
+        watch: <T>(value: T, callback: import("../modules/ui-watcher/ui-watcher.js").UIWatcherCallback<T>) => any;
+        unwatch: <T>(value: T) => void;
     };
     /**
      *

@@ -17,7 +17,7 @@ export class UIGeneric {
     public id = (id: string): void => void (this.htmlElement.id = id);
     public className = (className: string): void => void (this.htmlElement.className = className);
     public classList = (classList: string[]): void => this.htmlElement.classList.add(...classList);
-    public attribute = (name: string, value: string): void => this.htmlElement.setAttribute(name, value);
+    public attribute = (name: string, value: string): void => this.htmlElement.setAttribute(name, String(value));
     public removeAttribute = ( attribute : string ) : void => void (this.htmlElement.removeAttribute(attribute));
     public removeClassName = ( className : string ) : void => void ( this.htmlElement.classList.remove(className));
     public label = ( label : string ) : void => void (this.htmlElement.textContent = label);
@@ -37,6 +37,7 @@ export class UIGeneric {
     public remove = (): void => this.htmlElement.remove();
     public clear = (): string => (this.htmlElement.innerHTML = "");
     public get = (): HTMLElement => this.htmlElement;
-    public style = ( style : UIStyle ) : CSSStyleDeclaration & UIStyleProperties => Object.assign(this.htmlElement.style, style.properties);
+    public style = (style: UIStyle | UIStyleProperties): CSSStyleDeclaration & UIStyleProperties => Object.assign(this.htmlElement.style,style instanceof UIStyle ? style.properties : style);
+
 
 };

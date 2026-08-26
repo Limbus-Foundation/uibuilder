@@ -51,8 +51,8 @@ export class UIPanel extends UIGeneric {
         }
 
         if (option.attribute) {
-            option.attribute.forEach(({ name, value }) => {
-                this.element.setAttribute(name, value);
+            Object.entries(option.attribute).forEach(([name, value]) => {
+                this.element.setAttribute(name, String(value));
             });
         }
     }

@@ -36,8 +36,8 @@ export class UIImage extends UIGeneric {
         if (option.src)
             this.element.src = option.src;
         if (option.attribute) {
-            option.attribute.forEach(({ name, value }) => {
-                this.element.setAttribute(name, value);
+            Object.entries(option.attribute).forEach(([name, value]) => {
+                this.element.setAttribute(name, String(value));
             });
         }
     }

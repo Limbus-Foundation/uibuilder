@@ -36,8 +36,8 @@ export class UILabel extends UIGeneric {
         if (option.label)
             this.element.textContent = option.label;
         if (option.attribute) {
-            option.attribute.forEach(({ name, value }) => {
-                this.element.setAttribute(name, value);
+            Object.entries(option.attribute).forEach(([name, value]) => {
+                this.element.setAttribute(name, String(value));
             });
         }
     }

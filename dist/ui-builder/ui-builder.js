@@ -13,8 +13,12 @@ import { UILabel } from "../modules/ui-label/ui-label.js";
 import { UIPanel } from "../modules/ui-panel/ui-panel.js";
 import { UISlider } from '../modules/ui-slider/ui-slider.js';
 import { UITextField } from '../modules/ui-text-field/ui-text-field.js';
+import { UIComponent } from "../modules/ui-component/ui-component.js";
 import { UIBlend } from "../modules/ui-blend/ui-blend.js";
 import { UIStyle } from "../modules/ui-style/ui-style.js";
+import { UIWatcher } from "../modules/ui-watcher/ui-watcher.js";
+import { UIRouter } from "../modules/ui-router/ui-router.js";
+import { UIStore } from "../modules/ui-store/ui-store.js";
 /**
  * ### UIBuilder
  *
@@ -342,7 +346,37 @@ export class UIBuilder {
      * @see {@link UIComponent}
      * @public
      */
-    static component = (build) => build;
+    static component = UIComponent.build;
+    /**
+     *
+     * #### UIRouter
+     *
+     * Return a reference to the `UIRouter`.
+     *
+     * @returns `UIRouter`.
+     *
+     * @see {@link UIRouter}
+     * @public
+     */
+    static router = {
+        route: UIRouter.route,
+        navigate: UIRouter.navigate,
+        back: UIRouter.back,
+        forward: UIRouter.forward,
+        init: UIRouter.init
+    };
+    /**
+    *
+    * #### UIStore
+    *
+    * Return a reference to the `UIStore`.
+    *
+    * @returns `UIStore`.
+    *
+    * @see {@link UIStore}
+    * @public
+    */
+    static store = UIStore;
     /**
      *
      * #### UIBlend
@@ -388,6 +422,24 @@ export class UIBuilder {
     static body = {
         render: UIBody.render,
         style: UIBody.style
+    };
+    /**
+     *
+     * #### UIWatcher
+     *
+     * Return a reference to `UIWatcher`.
+     *
+     * @returns `UIWatcher`.
+     *
+     * @see {@link UIWatcher}
+     * @see {@link UIWatcher.watch}
+     * @see {@link UIWatcher.unwatch}
+     * @public
+     * @static
+     */
+    static watcher = {
+        watch: UIWatcher.watch,
+        unwatch: UIWatcher.unwatch
     };
     /**
      *

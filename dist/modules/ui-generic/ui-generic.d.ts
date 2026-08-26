@@ -17,5 +17,5 @@ export declare class UIGeneric {
     remove: () => void;
     clear: () => string;
     get: () => HTMLElement;
-    style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
+    style: (style: UIStyle | UIStyleProperties) => CSSStyleDeclaration & UIStyleProperties;
 }

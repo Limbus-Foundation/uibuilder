@@ -1,10 +1,9 @@
-
-// UI COMPONENT : 
+// UI COMPONENT :
 
 export class UIComponent {
 
-    public static build<T>(build: () => T): T {
-        return build();
+    public static build<T, P extends any[]>(build: (...props: P) => T): (...props: Partial<P>) => T {
+        return (...props) => build(...props as P);
     }
 
 }

@@ -19,6 +19,9 @@ import { UIElement } from "../modules/ui-element/ui-element.js";
 import { UIComponent } from "../modules/ui-component/ui-component.js";
 import { UIBlend } from "../modules/ui-blend/ui-blend.js";
 import { UIStyle, UIStyleProperties } from "../modules/ui-style/ui-style.js";
+import { UIWatcher } from "../modules/ui-watcher/ui-watcher.js";
+import { UIRouter } from "../modules/ui-router/ui-router.js";
+import { UIStore } from "../modules/ui-store/ui-store.js";
 
 /**
  * ### UIBuilder 
@@ -359,7 +362,39 @@ export class UIBuilder {
      * @see {@link UIComponent}
      * @public
      */
-    public static component = <T>(build: (...props: any[]) => T) : (...props: any[]) => T => build;
+    public static component = UIComponent.build;
+
+    /**
+     * 
+     * #### UIRouter
+     * 
+     * Return a reference to the `UIRouter`.
+     * 
+     * @returns `UIRouter`.
+     *
+     * @see {@link UIRouter}
+     * @public
+     */
+    public static router = {
+        route: UIRouter.route,
+        navigate: UIRouter.navigate,
+        back: UIRouter.back,
+        forward: UIRouter.forward,
+        init: UIRouter.init
+    };
+
+     /**
+     * 
+     * #### UIStore
+     * 
+     * Return a reference to the `UIStore`.
+     * 
+     * @returns `UIStore`.
+     *
+     * @see {@link UIStore}
+     * @public
+     */
+    public static store = UIStore;
 
     /**
      * 
@@ -408,6 +443,25 @@ export class UIBuilder {
     public static body = {
         render : UIBody.render,
         style: UIBody.style
+    };
+
+    /**
+     * 
+     * #### UIWatcher
+     * 
+     * Return a reference to `UIWatcher`.
+     *
+     * @returns `UIWatcher`.
+     *
+     * @see {@link UIWatcher}
+     * @see {@link UIWatcher.watch}
+     * @see {@link UIWatcher.unwatch}
+     * @public
+     * @static
+     */
+    public static watcher = {
+        watch : UIWatcher.watch,
+        unwatch : UIWatcher.unwatch
     };
 
     /**

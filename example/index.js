@@ -14,6 +14,17 @@ UIBuilder.body.render(label);
 UIBuilder.body.render(range);   
     
 UIBuilder.event(button).add("click", () => document.body.style.background = "red"); 
+
+const count = UIBuilder.watcher.watch(0, value => {
+    console.log(value);
+});
+
+count.value = 10;
+count.value = 20;
+
+UIBuilder.watcher.unwatch(count); 
+
+
 UIBuilder.event(range).add("input", () => label.label(UIBuilder.html.parseHTMLElement(range).value)); 
 
 const counter = UIBuilder.component((text,image) => {
@@ -21,6 +32,8 @@ const counter = UIBuilder.component((text,image) => {
     const label = UIBuilder.label({ label: text });
     const button = UIBuilder.button({ label: "Adicionar" });
     const img = UIBuilder.image({ src: image });
+
+    img.style({ width : "200px", height : "400px" });
 
     let count = 0;
 
@@ -33,11 +46,21 @@ const counter = UIBuilder.component((text,image) => {
 });
 
 UIBuilder.body.render(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
-UIBuilder.body.render(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
 
 const bodyStyle = UIBuilder.style({
     backgroundColor : "green",
 })
+
+const store = UIBuilder.store.set({
+    count: 3,
+    username: "rick"
+});
+
+// store.watch(state => {
+//     console.log(state.count);
+// });
+
+store.get.count++;
 
 UIBuilder.body.style(bodyStyle);
 
