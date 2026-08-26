@@ -1,16 +1,17 @@
-import { UIEvent } from '../module/ui-event/ui-event.js';
-import { IUIButton, UIButton } from "../module/ui-button/ui-button.js";
-import { IUICustom, UICustom } from "../module/ui-custom/ui-custom.js";
-import { IUIGroup, UIGroup } from '../module/ui-group/ui-group.js';
-import { IUIcon, UIIcon } from "../module/ui-icon/ui-icon.js";
-import { IUIIconButton, UIIconButton } from "../module/ui-icon-button/ui-icon-button.js";
-import { IUIImage, UIImage } from "../module/ui-image/ui-image.js";
-import { UILabel, IUILabel } from "../module/ui-label/ui-label.js";
-import { IUIPanel, UIPanel } from "../module/ui-panel/ui-panel.js";
-import { IUISlider, UISlider } from '../module/ui-slider/ui-slider.js';
-import { IUITextField, UITextField } from '../module/ui-text-field/ui-text-field.js';
-import { UIElement } from "../module/ui-element/ui-element.js";
-import { UIBlend } from "../module/ui-blend/ui-blend.js";
+import { UIEvent } from '../modules/ui-event/ui-event.js';
+import { IUIButton, UIButton } from "../modules/ui-button/ui-button.js";
+import { IUICustom, UICustom } from "../modules/ui-custom/ui-custom.js";
+import { IUIGroup, UIGroup } from '../modules/ui-group/ui-group.js';
+import { IUIcon, UIIcon } from "../modules/ui-icon/ui-icon.js";
+import { IUIIconButton, UIIconButton } from "../modules/ui-icon-button/ui-icon-button.js";
+import { IUIImage, UIImage } from "../modules/ui-image/ui-image.js";
+import { UILabel, IUILabel } from "../modules/ui-label/ui-label.js";
+import { IUIPanel, UIPanel } from "../modules/ui-panel/ui-panel.js";
+import { IUISlider, UISlider } from '../modules/ui-slider/ui-slider.js';
+import { IUITextField, UITextField } from '../modules/ui-text-field/ui-text-field.js';
+import { UIElement } from "../modules/ui-element/ui-element.js";
+import { UIBlend } from "../modules/ui-blend/ui-blend.js";
+import { UIStyle, UIStyleProperties } from "../modules/ui-style/ui-style.js";
 /**
  * ### UIBuilder
  *
@@ -355,6 +356,20 @@ export declare class UIBuilder {
     static blend: (...elements: UIElement[]) => UIBlend;
     /**
      *
+     * #### UIStyle
+     *
+     * Return a reference to the `UIStyle`.
+     *
+     * @param CSSStyleDeclaration
+     *
+     * @returns `CSSStyleDeclaration`.
+     *
+     * @see {@link UIStyle}
+     * @public
+     */
+    static style: (properties: UIStyleProperties) => UIStyle;
+    /**
+     *
      * #### UIBody
      *
      * Return a reference to the `<body>` via `UIBody`.
@@ -368,8 +383,8 @@ export declare class UIBuilder {
      * @static
      */
     static body: {
-        append: (element: UIElement | UIBlend) => import("../module/ui-append/ui-append.js").UIAppend;
-        prepend: (element: UIElement | UIBlend) => import("../module/ui-append/ui-append.js").UIAppend;
+        render: (element: UIElement | UIBlend, organization?: import("../modules/ui-append/ui-append.js").UIAppendOrganization) => import("../modules/ui-append/ui-append.js").UIAppend;
+        style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
     };
     /**
      *

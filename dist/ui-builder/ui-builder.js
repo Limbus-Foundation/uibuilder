@@ -1,19 +1,20 @@
 // (c) 2026 Rhyan Eduardo. MIT 
-import { UIBody } from "../module/ui-body/ui-body.js";
-import { UIHead } from '../module/ui-head/ui-head.js';
-import { UIEvent } from '../module/ui-event/ui-event.js';
-import { UIButton } from "../module/ui-button/ui-button.js";
-import { UICustom } from "../module/ui-custom/ui-custom.js";
-import { UIGroup } from '../module/ui-group/ui-group.js';
-import { UIHtml } from "../module/ui-html/ui-html.js";
-import { UIIcon } from "../module/ui-icon/ui-icon.js";
-import { UIIconButton } from "../module/ui-icon-button/ui-icon-button.js";
-import { UIImage } from "../module/ui-image/ui-image.js";
-import { UILabel } from "../module/ui-label/ui-label.js";
-import { UIPanel } from "../module/ui-panel/ui-panel.js";
-import { UISlider } from '../module/ui-slider/ui-slider.js';
-import { UITextField } from '../module/ui-text-field/ui-text-field.js';
-import { UIBlend } from "../module/ui-blend/ui-blend.js";
+import { UIBody } from "../modules/ui-body/ui-body.js";
+import { UIHead } from '../modules/ui-head/ui-head.js';
+import { UIEvent } from '../modules/ui-event/ui-event.js';
+import { UIButton } from "../modules/ui-button/ui-button.js";
+import { UICustom } from "../modules/ui-custom/ui-custom.js";
+import { UIGroup } from '../modules/ui-group/ui-group.js';
+import { UIHtml } from "../modules/ui-html/ui-html.js";
+import { UIIcon } from "../modules/ui-icon/ui-icon.js";
+import { UIIconButton } from "../modules/ui-icon-button/ui-icon-button.js";
+import { UIImage } from "../modules/ui-image/ui-image.js";
+import { UILabel } from "../modules/ui-label/ui-label.js";
+import { UIPanel } from "../modules/ui-panel/ui-panel.js";
+import { UISlider } from '../modules/ui-slider/ui-slider.js';
+import { UITextField } from '../modules/ui-text-field/ui-text-field.js';
+import { UIBlend } from "../modules/ui-blend/ui-blend.js";
+import { UIStyle } from "../modules/ui-style/ui-style.js";
 /**
  * ### UIBuilder
  *
@@ -358,6 +359,20 @@ export class UIBuilder {
     static blend = (...elements) => new UIBlend(...elements);
     /**
      *
+     * #### UIStyle
+     *
+     * Return a reference to the `UIStyle`.
+     *
+     * @param CSSStyleDeclaration
+     *
+     * @returns `CSSStyleDeclaration`.
+     *
+     * @see {@link UIStyle}
+     * @public
+     */
+    static style = (properties) => new UIStyle(properties);
+    /**
+     *
      * #### UIBody
      *
      * Return a reference to the `<body>` via `UIBody`.
@@ -371,8 +386,8 @@ export class UIBuilder {
      * @static
      */
     static body = {
-        append: UIBody.append,
-        prepend: UIBody.prepend
+        render: UIBody.render,
+        style: UIBody.style
     };
     /**
      *

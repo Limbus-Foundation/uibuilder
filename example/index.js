@@ -3,17 +3,15 @@
 
 import { UIBuilder } from "../dist/ui-builder/ui-builder.js";
 
-const button = UIBuilder.button({ text : "hello world"});
+const button = UIBuilder.button({ label : "hello world"});
 
 const label = UIBuilder.label({ label : "hello world"});
 
-const body = UIBuilder.body();
-
 const range = UIBuilder.custom({ tag : "input", attribute : { type : "range", min : 0, max : 100, value : 50 }});
 
-body.append(button); 
-body.append(label);  
-body.append(range);   
+UIBuilder.body.render(button); 
+UIBuilder.body.render(label);  
+UIBuilder.body.render(range);   
     
 UIBuilder.event(button).add("click", () => document.body.style.background = "red"); 
 UIBuilder.event(range).add("input", () => label.label(UIBuilder.html.parseHTMLElement(range).value)); 
@@ -21,7 +19,7 @@ UIBuilder.event(range).add("input", () => label.label(UIBuilder.html.parseHTMLEl
 const counter = UIBuilder.component((text,image) => {
 
     const label = UIBuilder.label({ label: text });
-    const button = UIBuilder.button({ text: "Adicionar" });
+    const button = UIBuilder.button({ label: "Adicionar" });
     const img = UIBuilder.image({ src: image });
 
     let count = 0;
@@ -34,7 +32,14 @@ const counter = UIBuilder.component((text,image) => {
     return UIBuilder.blend(label, button,img); 
 });
 
-body.append(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
-body.append(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
+UIBuilder.body.render(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
+UIBuilder.body.render(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
+
+const bodyStyle = UIBuilder.style({
+    backgroundColor : "green",
+})
+
+UIBuilder.body.style(bodyStyle);
+
 
 // console.log(counter("Click para adicionar ao contador")); 
