@@ -56,9 +56,9 @@ const store = UIBuilder.store.set({
     username: "rick"
 });
 
-// store.watch(state => {
-//     console.log(state.count);
-// });
+UIBuilder.watcher.watch(store, value => {
+    console.log(value.count);
+});
 
 store.get.count++;
 
