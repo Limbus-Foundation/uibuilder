@@ -22,6 +22,7 @@ import { UIStyle, UIStyleProperties } from "../modules/ui-style/ui-style.js";
 import { UIWatcher } from "../modules/ui-watcher/ui-watcher.js";
 import { UIRouter } from "../modules/ui-router/ui-router.js";
 import { UIStore } from "../modules/ui-store/ui-store.js";
+import { IUIRouteButton, UIRouteButton } from "../modules/ui-route-button/ui-route-button.js";
 
 /**
  * ### UIBuilder 
@@ -245,6 +246,35 @@ export class UIBuilder {
      * @public
      */
     public static label = (option: IUILabel): UILabel => new UILabel(option);
+
+    /**
+     *
+     * #### UIBuilder.UIRouteButton
+     *
+     * Wrapper class for creating and managing a route `<a>` element.
+     *
+     * The `UIRouteButton` navigates through `UIRouter` without reloading the page.
+     *
+     * @param option - Configuration object to initialize the route button.
+     * @param option.id - Unique ID for the HTML element.
+     * @param option.className - Single class name string.
+     * @param option.classList - List of CSS class names.
+     * @param option.attribute - Custom HTML attributes.
+     * @param option.label - Link label.
+     * @param option.path - Route path.
+     *
+     * @example
+     * ```ts
+     * const button = new UIRouteButton({
+     *     label: "Get Started",
+     *     path: "/get-started"
+     * }); 
+     * ```
+     *
+     * @public
+     */
+    public static routeButton = (option: IUIRouteButton): UIRouteButton => new UIRouteButton(option);
+
 
     /**
      * 
