@@ -23,7 +23,7 @@ export function UIComponent<T extends object, P extends Record<string, any>>(
             }
         };
 
-        const component = build(state, self);
+        const component = build(state, self); 
 
         const result = component as T & {
             state(state: Partial<P>): void;
