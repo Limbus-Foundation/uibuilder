@@ -4,6 +4,7 @@ export declare class UIRouter {
     private static routes;
     private static currentPath;
     private static rootRouter;
+    private static lastRouteContent;
     private static elements;
     static root: (element: UIElement) => void;
     static route: (path: string, element: UIElement | UIBlend) => void;

@@ -10,11 +10,12 @@ export class UIRouter {
     private static routes = new Map<string, UIElement | UIBlend>();
     private static currentPath: string = "";
     private static rootRouter: UIElement | typeof UIBody = UIBody;
+    private static lastRouteContent: UIElement[] = [];
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
         if (element instanceof UIBlend) return [...element];
 
-        return [element];
+        return [element];  
     };
 
     public static root = (element: UIElement): void => {
@@ -43,23 +44,27 @@ export class UIRouter {
 
         if (path === UIRouter.currentPath) return;
 
-        const previous = UIRouter.routes.get(UIRouter.currentPath);
         const current = UIRouter.routes.get(path);
 
-        if (previous) {
-            for (const element of UIRouter.elements(previous)) {
-                if (element.get().parentNode === document.body) {
-                    UIRouter.rootRouter.unrender(element);
-                }
+        for (const element of UIRouter.lastRouteContent) {
+            if (element.get().parentNode) {
+                UIRouter.rootRouter.unrender(element);
             }
         }
 
+        UIRouter.lastRouteContent = [];
+
         if (current) {
-            for (const element of UIRouter.elements(current)) {
+
+            const elements = UIRouter.elements(current);
+
+            for (const element of elements) {
                 if (!element.get().parentNode) {
                     UIRouter.rootRouter.render(element);
                 }
             }
+
+            UIRouter.lastRouteContent = elements;
         }
 
         UIRouter.currentPath = path;

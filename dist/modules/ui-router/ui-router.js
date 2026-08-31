@@ -5,6 +5,7 @@ export class UIRouter {
     static routes = new Map();
     static currentPath = "";
     static rootRouter = UIBody;
+    static lastRouteContent = [];
     static elements = (element) => {
         if (element instanceof UIBlend)
             return [...element];
@@ -28,21 +29,21 @@ export class UIRouter {
         const path = window.location.pathname;
         if (path === UIRouter.currentPath)
             return;
-        const previous = UIRouter.routes.get(UIRouter.currentPath);
         const current = UIRouter.routes.get(path);
-        if (previous) {
-            for (const element of UIRouter.elements(previous)) {
-                if (element.get().parentNode === document.body) {
-                    UIRouter.rootRouter.unrender(element);
-                }
+        for (const element of UIRouter.lastRouteContent) {
+            if (element.get().parentNode) {
+                UIRouter.rootRouter.unrender(element);
             }
         }
+        UIRouter.lastRouteContent = [];
         if (current) {
-            for (const element of UIRouter.elements(current)) {
+            const elements = UIRouter.elements(current);
+            for (const element of elements) {
                 if (!element.get().parentNode) {
                     UIRouter.rootRouter.render(element);
                 }
             }
+            UIRouter.lastRouteContent = elements;
         }
         UIRouter.currentPath = path;
     };
