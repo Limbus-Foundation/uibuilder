@@ -3,7 +3,9 @@ import { UIBlend } from "../ui-blend/ui-blend.js";
 export declare class UIRouter {
     private static routes;
     private static currentPath;
+    private static rootRouter;
     private static elements;
+    static root: (element: UIElement) => void;
     static route: (path: string, element: UIElement | UIBlend) => void;
     static navigate: (path: string) => void;
     static back: () => void;

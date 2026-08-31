@@ -1,13 +1,17 @@
 // UI ROUTER :
 import { UIBlend } from "../ui-blend/ui-blend.js";
-import { UIBuilder } from "../../ui-builder/ui-builder.js";
+import { UIBody } from "../ui-body/ui-body.js";
 export class UIRouter {
     static routes = new Map();
     static currentPath = "";
+    static rootRouter = UIBody;
     static elements = (element) => {
         if (element instanceof UIBlend)
             return [...element];
         return [element];
+    };
+    static root = (element) => {
+        UIRouter.rootRouter = element;
     };
     static route = (path, element) => {
         UIRouter.routes.set(path, element);
@@ -29,14 +33,14 @@ export class UIRouter {
         if (previous) {
             for (const element of UIRouter.elements(previous)) {
                 if (element.get().parentNode === document.body) {
-                    UIBuilder.body.unrender(element);
+                    UIRouter.rootRouter.unrender(element);
                 }
             }
         }
         if (current) {
             for (const element of UIRouter.elements(current)) {
                 if (!element.get().parentNode) {
-                    UIBuilder.body.render(element);
+                    UIRouter.rootRouter.render(element);
                 }
             }
         }

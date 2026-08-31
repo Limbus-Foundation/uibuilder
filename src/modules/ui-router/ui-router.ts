@@ -3,16 +3,22 @@
 import { UIElement } from "../ui-element/ui-element.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIBuilder } from "../../ui-builder/ui-builder.js";
+import { UIBody } from "../ui-body/ui-body.js";
 
 export class UIRouter {
 
     private static routes = new Map<string, UIElement | UIBlend>();
     private static currentPath: string = "";
+    private static rootRouter: UIElement | typeof UIBody = UIBody;
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
         if (element instanceof UIBlend) return [...element];
 
         return [element];
+    };
+
+    public static root = (element: UIElement): void => {
+        UIRouter.rootRouter = element;
     };
 
     public static route = (path: string, element: UIElement | UIBlend): void => {
@@ -43,7 +49,7 @@ export class UIRouter {
         if (previous) {
             for (const element of UIRouter.elements(previous)) {
                 if (element.get().parentNode === document.body) {
-                    UIBuilder.body.unrender(element);
+                    UIRouter.rootRouter.unrender(element);
                 }
             }
         }
@@ -51,7 +57,7 @@ export class UIRouter {
         if (current) {
             for (const element of UIRouter.elements(current)) {
                 if (!element.get().parentNode) {
-                    UIBuilder.body.render(element);
+                    UIRouter.rootRouter.render(element);
                 }
             }
         }
