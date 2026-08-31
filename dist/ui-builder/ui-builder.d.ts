@@ -359,6 +359,7 @@ export declare class UIBuilder {
         back: () => void;
         forward: () => void;
         init: () => void;
+        root: (element: UIElement) => void;
     };
     /**
     *

@@ -380,7 +380,8 @@ export class UIBuilder {
         navigate: UIRouter.navigate,
         back: UIRouter.back,
         forward: UIRouter.forward,
-        init: UIRouter.init
+        init: UIRouter.init,
+        root : UIRouter.root
     };
 
      /**
