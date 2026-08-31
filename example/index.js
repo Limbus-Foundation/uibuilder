@@ -51,18 +51,21 @@ const counter = UIBuilder.component(({ text, image }, self) => {
     return UIBuilder.blend(label, button, img);
 });
 
-counter.state({ 
+
+const counter1 = counter({ 
     text: "Click para adicionar ao contador",
     image: "https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"
-});
+})
+
+counter1.state();
 
 const b = UIBuilder.button({ label: "Mudar texto" });
 
 UIBuilder.event(b).add("click", () => {
-    counter.state({text: "BOMBOM"});
+    counter1.state({text: "BOMBOM"});
 });
 
-UIBuilder.body.render(counter);
+UIBuilder.body.render(counter1);
 UIBuilder.body.render(b);
 
 const bodyStyle = UIBuilder.style({
