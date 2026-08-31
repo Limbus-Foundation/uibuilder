@@ -346,7 +346,7 @@ export class UIBuilder {
      * @see {@link UIComponent}
      * @public
      */
-    static component = UIComponent.build;
+    static component = UIComponent;
     /**
      *
      * #### UIRouter
@@ -376,7 +376,9 @@ export class UIBuilder {
     * @see {@link UIStore}
     * @public
     */
-    static store = UIStore;
+    static store = {
+        set: UIStore.set
+    };
     /**
      *
      * #### UIBlend
@@ -421,6 +423,7 @@ export class UIBuilder {
      */
     static body = {
         render: UIBody.render,
+        unrender: UIBody.unrender,
         style: UIBody.style
     };
     /**

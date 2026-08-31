@@ -13,11 +13,12 @@ import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
  * @see {@link UIBody}
  * @see {@link UIBody.append}
  * @see {@link UIBody.prepend}
+ * @see {@link UIBody.style}
  * @public
  * @static
  */
 export declare class UIBody {
     static render: (element: UIElement | UIBlend, organization?: UIAppendOrganization) => UIAppend;
-    unrender: (element: UIElement | UIBlend) => void;
+    static unrender: (element: UIElement | UIBlend) => void;
     static style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
 }

@@ -1,7 +1,20 @@
 // UI COMPONENT :
-export class UIComponent {
-    static build(build) {
-        return (...props) => build(...props);
-    }
+export function UIComponent(build) {
+    let state = {};
+    const listeners = [];
+    const self = {
+        stateListen: (callback) => {
+            listeners.push(callback);
+        }
+    };
+    const component = build(state, self);
+    const result = component;
+    result.state = (value) => {
+        state = { ...state, ...value };
+        for (const listener of listeners) {
+            listener(state);
+        }
+    };
+    return result;
 }
 //# sourceMappingURL=ui-component.js.map

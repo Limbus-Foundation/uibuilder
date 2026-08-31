@@ -12,12 +12,13 @@ import { UIBlend } from "../ui-blend/ui-blend.js";
  * @see {@link UIBody}
  * @see {@link UIBody.append}
  * @see {@link UIBody.prepend}
+ * @see {@link UIBody.style}
  * @public
  * @static
  */
 export class UIBody {
     static render = (element, organization = "below") => new UIAppend(document.body, element, organization);
-    unrender = (element) => {
+    static unrender = (element) => {
         if (element instanceof UIBlend) {
             for (const el of element)
                 document.body.removeChild(el.get());

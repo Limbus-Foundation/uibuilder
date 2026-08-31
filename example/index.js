@@ -27,25 +27,43 @@ UIBuilder.watcher.unwatch(count);
 
 UIBuilder.event(range).add("input", () => label.label(UIBuilder.html.parseHTMLElement(range).value)); 
 
-const counter = UIBuilder.component((text,image) => {
+const counter = UIBuilder.component(({ text, image }, self) => {
 
     const label = UIBuilder.label({ label: text });
     const button = UIBuilder.button({ label: "Adicionar" });
     const img = UIBuilder.image({ src: image });
 
-    img.style({ width : "200px", height : "400px" });
+    img.style({ width: "200px", height: "400px" });
 
-    let count = 0;
+    label.renderListen(()=> console.log("Label renderizado"));
+    button.renderListen(()=> console.log("Button renderizado"));
+
+    let count = 0;   
+
+    self.stateListen(state => label.label(state.text));
+    self.stateListen(state => img.src(state.image));
 
     UIBuilder.event(button).add("click", () => {
         count++;
-        label.label(String(count));
+        label.label(String(count)); 
     });
 
-    return UIBuilder.blend(label, button,img); 
+    return UIBuilder.blend(label, button, img);
 });
 
-UIBuilder.body.render(counter("Click para adicionar ao contador","https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"));
+counter.state({ 
+    text: "Click para adicionar ao contador",
+    image: "https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"
+});
+
+const b = UIBuilder.button({ label: "Mudar texto" });
+
+UIBuilder.event(b).add("click", () => {
+    counter.state({text: "BOMBOM"});
+});
+
+UIBuilder.body.render(counter);
+UIBuilder.body.render(b);
 
 const bodyStyle = UIBuilder.style({
     backgroundColor : "green",
@@ -66,3 +84,5 @@ UIBuilder.body.style(bodyStyle);
 
 
 // console.log(counter("Click para adicionar ao contador")); 
+
+

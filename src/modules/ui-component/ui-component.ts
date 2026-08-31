@@ -1,9 +1,39 @@
 // UI COMPONENT :
 
-export class UIComponent {
+export function UIComponent<T extends object, P extends Record<string, any>>(
+    build: (
+        props: P,
+        self: {
+            stateListen: (callback: (state: P) => void) => void;
+        }
+    ) => T
+): T & {
+    state(state: Partial<P>): void;
+} {
 
-    public static build<T, P extends any[]>(build: (...props: P) => T): (...props: Partial<P>) => T {
-        return (...props) => build(...props as P);
-    }
+    let state = {} as P;
 
+    const listeners: ((state: P) => void)[] = [];
+
+    const self = {
+        stateListen: (callback: (state: P) => void) => {
+            listeners.push(callback);
+        }
+    };
+
+    const component = build(state, self);
+
+    const result = component as T & {
+        state(state: Partial<P>): void;
+    };
+
+    result.state = (value) => {
+        state = { ...state, ...value };
+
+        for (const listener of listeners) {
+            listener(state);
+        }
+    };
+
+    return result;
 }

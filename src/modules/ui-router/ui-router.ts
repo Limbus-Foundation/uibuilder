@@ -7,11 +7,10 @@ import { UIBuilder } from "../../ui-builder/ui-builder.js";
 export class UIRouter {
 
     private static routes = new Map<string, UIElement | UIBlend>();
+    private static currentPath: string = "";
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
-        if (element instanceof UIBlend) {
-            return [...element];
-        }
+        if (element instanceof UIBlend) return [...element];
 
         return [element];
     };
@@ -21,6 +20,9 @@ export class UIRouter {
     };
 
     public static navigate = (path: string): void => {
+
+        if (path === UIRouter.currentPath) return;
+
         history.pushState({}, "", path);
         UIRouter.check();
     };
@@ -31,34 +33,36 @@ export class UIRouter {
 
     public static check = (): void => {
 
-        const currentPath = window.location.pathname;
+        const path = window.location.pathname;
 
-        for (const [path, element] of UIRouter.routes) {
+        if (path === UIRouter.currentPath) return;
 
-            const elements = UIRouter.elements(element);
+        const previous = UIRouter.routes.get(UIRouter.currentPath);
+        const current = UIRouter.routes.get(path);
 
-            if (path === currentPath) {
-
-                for (const element of elements) {
-                    if (!element.get().parentNode) {
-                        UIBuilder.body.render(element)
-                    }
-                };
-
-            } else {
-
-                for (const element of elements) {
-                    if (element.get().parentNode) {
-                        element.get().remove();
-                    }
+        if (previous) {
+            for (const element of UIRouter.elements(previous)) {
+                if (element.get().parentNode === document.body) {
+                    UIBuilder.body.unrender(element);
                 }
-
             }
         }
+
+        if (current) {
+            for (const element of UIRouter.elements(current)) {
+                if (!element.get().parentNode) {
+                    UIBuilder.body.render(element);
+                }
+            }
+        }
+
+        UIRouter.currentPath = path;
     };
 
     public static init = (): void => {
+
         window.addEventListener("popstate", UIRouter.check);
+
         UIRouter.check();
     };
 

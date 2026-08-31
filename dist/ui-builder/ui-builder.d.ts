@@ -341,7 +341,7 @@ export declare class UIBuilder {
      * @see {@link UIComponent}
      * @public
      */
-    static component: typeof UIComponent.build;
+    static component: typeof UIComponent;
     /**
      *
      * #### UIRouter
@@ -371,7 +371,9 @@ export declare class UIBuilder {
     * @see {@link UIStore}
     * @public
     */
-    static store: typeof UIStore;
+    static store: {
+        set: <T extends object>(initial: T) => UIStore<T>;
+    };
     /**
      *
      * #### UIBlend
@@ -416,6 +418,7 @@ export declare class UIBuilder {
      */
     static body: {
         render: (element: UIElement | UIBlend, organization?: import("../modules/ui-append/ui-append.js").UIAppendOrganization) => import("../modules/ui-append/ui-append.js").UIAppend;
+        unrender: (element: UIElement | UIBlend) => void;
         style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
     };
     /**

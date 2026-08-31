@@ -362,7 +362,7 @@ export class UIBuilder {
      * @see {@link UIComponent}
      * @public
      */
-    public static component = UIComponent.build;
+    public static component = UIComponent;
 
     /**
      * 
@@ -394,7 +394,9 @@ export class UIBuilder {
      * @see {@link UIStore}
      * @public
      */
-    public static store = UIStore;
+    public static store = {
+        set : UIStore.set
+    };
 
     /**
      * 
@@ -442,6 +444,7 @@ export class UIBuilder {
      */
     public static body = {
         render : UIBody.render,
+        unrender : UIBody.unrender,
         style: UIBody.style
     };
 

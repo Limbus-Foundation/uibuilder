@@ -17,6 +17,7 @@ import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
  * @see {@link UIBody}
  * @see {@link UIBody.append}
  * @see {@link UIBody.prepend} 
+ * @see {@link UIBody.style} 
  * @public
  * @static    
  */
@@ -24,7 +25,7 @@ export class UIBody {
     
     public static render = (element: UIElement | UIBlend, organization : UIAppendOrganization = "below" ): UIAppend => new UIAppend(document.body, element, organization);
     
-    public unrender = (element: UIElement | UIBlend): void => {
+    public static unrender = (element: UIElement | UIBlend): void => {
 
         if (element instanceof UIBlend) {
             for (const el of element) document.body.removeChild(el.get());
@@ -33,6 +34,7 @@ export class UIBody {
 
         document.body.removeChild(element.get());
     };
+
     public static style = ( style : UIStyle ) : CSSStyleDeclaration & UIStyleProperties => Object.assign(document.body.style, style.properties);
     
 };

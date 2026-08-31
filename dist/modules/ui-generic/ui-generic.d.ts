@@ -1,9 +1,12 @@
-import { UIAppend, UIAppendOrganization } from "../ui-append/ui-append.js";
+import { UIAppendOrganization } from "../ui-append/ui-append.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
 import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
 export declare class UIGeneric {
     private htmlElement;
+    protected rendered: boolean;
+    private renderCallbacks;
+    private unrenderCallbacks;
     constructor(element: HTMLElement);
     id: (id: string) => void;
     className: (className: string) => void;
@@ -12,8 +15,12 @@ export declare class UIGeneric {
     removeAttribute: (attribute: string) => void;
     removeClassName: (className: string) => void;
     label: (label: string) => void;
-    render: (element: UIElement | UIBlend, organization?: UIAppendOrganization) => UIAppend;
+    render: (element: UIElement | UIBlend, organization?: UIAppendOrganization) => void;
+    __invokeUnrenderListen: () => void;
+    __invokeRenderListen: () => void;
     unrender: (element: UIElement | UIBlend) => void;
+    renderListen: (callback: () => void) => void;
+    unrenderListen: (callback: () => void) => void;
     remove: () => void;
     clear: () => string;
     get: () => HTMLElement;
