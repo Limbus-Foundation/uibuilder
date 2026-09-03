@@ -13,7 +13,7 @@
  * @static
  */
 export class UIHead {
-    static append = (element) => document.head.appendChild(element.get());
+    static append = (element) => document.head.appendChild(element.__get());
 }
 ;
 //# sourceMappingURL=ui-head.js.map

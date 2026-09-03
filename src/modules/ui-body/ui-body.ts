@@ -28,11 +28,15 @@ export class UIBody {
     public static unrender = (element: UIElement | UIBlend): void => {
 
         if (element instanceof UIBlend) {
-            for (const el of element) document.body.removeChild(el.get());
+            for (const el of element) document.body.removeChild(el.__get());
             return;
         }
 
-        document.body.removeChild(element.get());
+        document.body.removeChild(element.__get());
+    };
+
+    public static replaceRender = ( oldUIElement : UIElement, newUIElement : UIElement ) : void => {
+        document.body.replaceChild(newUIElement.__get(),oldUIElement.__get())
     };
 
     public static style = ( style : UIStyle ) : CSSStyleDeclaration & UIStyleProperties => Object.assign(document.body.style, style.properties);

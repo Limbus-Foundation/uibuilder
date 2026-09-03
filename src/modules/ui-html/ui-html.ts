@@ -30,5 +30,5 @@ export class UIHtml {
      * @public
      * @static
      */
-    public static parseUIElement = ( element : UIElement ) : HTMLElement => element.get();
+    public static parseUIElement = ( element : UIElement ) : HTMLElement => element.__get();
 };   

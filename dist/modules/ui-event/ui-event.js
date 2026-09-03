@@ -24,7 +24,7 @@ export class UIEvent {
      * @public
      */
     add = (event, callback) => {
-        this.element.get().addEventListener(event, callback);
+        this.element.__get().addEventListener(event, callback);
         return this;
     };
     /**
@@ -38,7 +38,7 @@ export class UIEvent {
      * @public
      */
     remove = (event, callback) => {
-        this.element.get().removeEventListener(event, callback);
+        this.element.__get().removeEventListener(event, callback);
         return this;
     };
 }

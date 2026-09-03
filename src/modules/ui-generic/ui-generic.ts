@@ -27,6 +27,10 @@ export class UIGeneric {
     public removeClassName = (className: string): void => void (this.htmlElement.classList.remove(className));
     public label = (label: string): void => void (this.htmlElement.textContent = label);
 
+    public replaceRender = ( oldUIElement : UIElement, newUIElement : UIElement ) : void => {
+        this.htmlElement.replaceChild(newUIElement.__get(),oldUIElement.__get())
+    };
+
     public render = (element: UIElement | UIBlend, organization: UIAppendOrganization = "below"): void => {
 
         new UIAppend(this.htmlElement, element, organization);
@@ -54,14 +58,14 @@ export class UIGeneric {
         if (element instanceof UIBlend) {
 
             for (const el of element) {
-                this.htmlElement.removeChild(el.get());
+                this.htmlElement.removeChild(el.__get());
                 el.__invokeUnrenderListen();
             };
 
             return; 
         };
 
-        this.htmlElement.removeChild(element.get());
+        this.htmlElement.removeChild(element.__get());
         element.__invokeUnrenderListen();
     };
 
@@ -75,7 +79,7 @@ export class UIGeneric {
 
     public remove = (): void => this.htmlElement.remove();
     public clear = (): string => (this.htmlElement.innerHTML = "");
-    public get = (): HTMLElement => this.htmlElement;
+    public __get = (): HTMLElement => this.htmlElement;
 
     public style = (style: UIStyle | UIStyleProperties): CSSStyleDeclaration & UIStyleProperties =>
         Object.assign(this.htmlElement.style, style instanceof UIStyle ? style.properties : style);

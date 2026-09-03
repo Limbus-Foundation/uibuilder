@@ -6,6 +6,8 @@ export class UIRouter {
     static currentPath = "";
     static rootRouter = UIBody;
     static lastRouteContent = [];
+    static registeredRouteList = [];
+    static registeredOutRoute;
     static elements = (element) => {
         if (element instanceof UIBlend)
             return [...element];
@@ -16,6 +18,10 @@ export class UIRouter {
     };
     static route = (path, element) => {
         UIRouter.routes.set(path, element);
+        if (!UIRouter.registeredRouteList.includes(path)) {
+            UIRouter.registeredRouteList.push(path);
+        }
+        ;
     };
     static navigate = (path) => {
         if (path === UIRouter.currentPath)
@@ -25,26 +31,45 @@ export class UIRouter {
     };
     static back = () => history.back();
     static forward = () => history.forward();
+    static outRoute = (element) => {
+        UIRouter.registeredOutRoute = element;
+    };
     static check = () => {
         const path = window.location.pathname;
         if (path === UIRouter.currentPath)
             return;
         const current = UIRouter.routes.get(path);
-        for (const element of UIRouter.lastRouteContent) {
-            if (element.get().parentNode) {
-                UIRouter.rootRouter.unrender(element);
-            }
-        }
-        UIRouter.lastRouteContent = [];
-        if (current) {
-            const elements = UIRouter.elements(current);
+        const next = current ?? UIRouter.registeredOutRoute;
+        if (!next)
+            return;
+        const elements = UIRouter.elements(next);
+        if (UIRouter.lastRouteContent.length === 0) {
             for (const element of elements) {
-                if (!element.get().parentNode) {
-                    UIRouter.rootRouter.render(element);
-                }
+                UIRouter.rootRouter.render(element);
             }
-            UIRouter.lastRouteContent = elements;
+            ;
         }
+        else {
+            const previous = UIRouter.lastRouteContent;
+            const length = Math.max(previous.length, elements.length);
+            for (let index = 0; index < length; index++) {
+                const oldElement = previous[index];
+                const newElement = elements[index];
+                if (oldElement && newElement) {
+                    UIRouter.rootRouter.replaceRender(newElement, oldElement);
+                }
+                else if (newElement) {
+                    UIRouter.rootRouter.render(newElement);
+                }
+                else if (oldElement) {
+                    UIRouter.rootRouter.unrender(oldElement);
+                }
+                ;
+            }
+            ;
+        }
+        ;
+        UIRouter.lastRouteContent = elements;
         UIRouter.currentPath = path;
     };
     static init = () => {

@@ -15,6 +15,7 @@ export declare class UIGeneric {
     removeAttribute: (attribute: string) => void;
     removeClassName: (className: string) => void;
     label: (label: string) => void;
+    replaceRender: (oldUIElement: UIElement, newUIElement: UIElement) => void;
     render: (element: UIElement | UIBlend, organization?: UIAppendOrganization) => void;
     __invokeUnrenderListen: () => void;
     __invokeRenderListen: () => void;
@@ -23,6 +24,6 @@ export declare class UIGeneric {
     unrenderListen: (callback: () => void) => void;
     remove: () => void;
     clear: () => string;
-    get: () => HTMLElement;
+    __get: () => HTMLElement;
     style: (style: UIStyle | UIStyleProperties) => CSSStyleDeclaration & UIStyleProperties;
 }

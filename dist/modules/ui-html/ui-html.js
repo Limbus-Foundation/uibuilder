@@ -25,7 +25,7 @@ export class UIHtml {
      * @public
      * @static
      */
-    static parseUIElement = (element) => element.get();
+    static parseUIElement = (element) => element.__get();
 }
 ;
 //# sourceMappingURL=ui-html.js.map

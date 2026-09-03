@@ -33,7 +33,7 @@ export class UIEvent {
      * @public
      */
     public add = <K extends keyof HTMLElementEventMap>(event: K, callback: EventCallback<K>): this => {
-        this.element.get().addEventListener(event, callback as EventListener);
+        this.element.__get().addEventListener(event, callback as EventListener);
         return this;
     };
 
@@ -48,7 +48,7 @@ export class UIEvent {
      * @public
      */
     public remove = <K extends keyof HTMLElementEventMap>(event: K, callback: EventCallback<K>): this => {
-        this.element.get().removeEventListener(event, callback as EventListener);
+        this.element.__get().removeEventListener(event, callback as EventListener);
         return this;
     };
 }

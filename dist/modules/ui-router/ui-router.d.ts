@@ -5,12 +5,15 @@ export declare class UIRouter {
     private static currentPath;
     private static rootRouter;
     private static lastRouteContent;
+    private static registeredRouteList;
+    private static registeredOutRoute;
     private static elements;
     static root: (element: UIElement) => void;
     static route: (path: string, element: UIElement | UIBlend) => void;
     static navigate: (path: string) => void;
     static back: () => void;
     static forward: () => void;
-    static check: () => void;
+    static outRoute: (element: UIElement | UIBlend) => void;
+    private static check;
     static init: () => void;
 }

@@ -1,8 +1,5 @@
 // UI PANEL : 
 
-import { UIAppend } from "../ui-append/ui-append.js";
-import { UIBlend } from "../ui-blend/ui-blend.js";
-import { UIElement } from "../ui-element/ui-element.js";
 import { UIGeneric } from "../ui-generic/ui-generic.js";
 
 export interface IUIPanel {

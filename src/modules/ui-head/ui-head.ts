@@ -17,5 +17,5 @@ import { UIElement } from "../ui-element/ui-element.js";
  * @static
  */
 export class UIHead {
-    public static append = (element: UIElement): HTMLElement => document.head.appendChild(element.get());
+    public static append = (element: UIElement): HTMLElement => document.head.appendChild(element.__get());
 };

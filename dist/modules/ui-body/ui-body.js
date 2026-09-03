@@ -21,10 +21,13 @@ export class UIBody {
     static unrender = (element) => {
         if (element instanceof UIBlend) {
             for (const el of element)
-                document.body.removeChild(el.get());
+                document.body.removeChild(el.__get());
             return;
         }
-        document.body.removeChild(element.get());
+        document.body.removeChild(element.__get());
+    };
+    static replaceRender = (oldUIElement, newUIElement) => {
+        document.body.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
     static style = (style) => Object.assign(document.body.style, style.properties);
 }
