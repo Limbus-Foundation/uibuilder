@@ -1,4 +1,3 @@
-
 // UI ROUTER :
 
 import { UIElement } from "../ui-element/ui-element.js";
@@ -12,12 +11,12 @@ export class UIRouter {
     private static rootRouter: UIElement | typeof UIBody = UIBody;
     private static lastRouteContent: UIElement[] = [];
     private static registeredRouteList: string[] = [];
-    private static registeredOutRoute: UIElement | UIBlend; 
+    private static registeredOutRoute: UIElement | UIBlend;
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
         if (element instanceof UIBlend) return [...element];
 
-        return [element]; 
+        return [element];
     };
 
     public static root = (element: UIElement): void => {
@@ -61,8 +60,9 @@ export class UIRouter {
         if (!next) return;
 
         const elements = UIRouter.elements(next);
+        const previous = UIRouter.lastRouteContent;
 
-        if (UIRouter.lastRouteContent.length === 0) {
+        if (previous.length === 0) {
 
             for (const element of elements) {
                 UIRouter.rootRouter.render(element);
@@ -70,7 +70,6 @@ export class UIRouter {
 
         } else {
 
-            const previous = UIRouter.lastRouteContent;
             const length = Math.max(previous.length, elements.length);
 
             for (let index = 0; index < length; index++) {
@@ -80,7 +79,11 @@ export class UIRouter {
 
                 if (oldElement && newElement) {
 
-                    UIRouter.rootRouter.replaceRender(newElement, oldElement);
+                    if (oldElement.__get().parentNode) {
+                        UIRouter.rootRouter.replaceRender(newElement, oldElement);
+                    } else {
+                        UIRouter.rootRouter.render(newElement);
+                    };
 
                 } else if (newElement) {
 
@@ -88,8 +91,9 @@ export class UIRouter {
 
                 } else if (oldElement) {
 
-                    UIRouter.rootRouter.unrender(oldElement);
-
+                    if (oldElement.__get().parentNode) {
+                        UIRouter.rootRouter.unrender(oldElement);
+                    };
                 };
             };
         };
