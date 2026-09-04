@@ -15,7 +15,7 @@ export declare class UIGeneric {
     removeAttribute: (attribute: string) => void;
     removeClassName: (className: string) => void;
     label: (label: string) => void;
-    replaceRender: (oldUIElement: UIElement, newUIElement: UIElement) => void;
+    replaceRender: (newUIElement: UIElement, oldUIElement: UIElement) => void;
     render: (element: UIElement | UIBlend, organization?: UIAppendOrganization) => void;
     __invokeUnrenderListen: () => void;
     __invokeRenderListen: () => void;

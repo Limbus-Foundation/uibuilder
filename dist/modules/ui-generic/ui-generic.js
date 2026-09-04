@@ -19,7 +19,7 @@ export class UIGeneric {
     removeAttribute = (attribute) => void (this.htmlElement.removeAttribute(attribute));
     removeClassName = (className) => void (this.htmlElement.classList.remove(className));
     label = (label) => void (this.htmlElement.textContent = label);
-    replaceRender = (oldUIElement, newUIElement) => {
+    replaceRender = (newUIElement, oldUIElement) => {
         this.htmlElement.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
     render = (element, organization = "below") => {

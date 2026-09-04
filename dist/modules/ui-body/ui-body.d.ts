@@ -20,6 +20,6 @@ import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
 export declare class UIBody {
     static render: (element: UIElement | UIBlend, organization?: UIAppendOrganization) => UIAppend;
     static unrender: (element: UIElement | UIBlend) => void;
-    static replaceRender: (oldUIElement: UIElement, newUIElement: UIElement) => void;
+    static replaceRender: (newUIElement: UIElement, oldUIElement: UIElement) => void;
     static style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
 }

@@ -43,26 +43,35 @@ export class UIRouter {
         if (!next)
             return;
         const elements = UIRouter.elements(next);
-        if (UIRouter.lastRouteContent.length === 0) {
+        const previous = UIRouter.lastRouteContent;
+        if (previous.length === 0) {
             for (const element of elements) {
                 UIRouter.rootRouter.render(element);
             }
             ;
         }
         else {
-            const previous = UIRouter.lastRouteContent;
             const length = Math.max(previous.length, elements.length);
             for (let index = 0; index < length; index++) {
                 const oldElement = previous[index];
                 const newElement = elements[index];
                 if (oldElement && newElement) {
-                    UIRouter.rootRouter.replaceRender(newElement, oldElement);
+                    if (oldElement.__get().parentNode) {
+                        UIRouter.rootRouter.replaceRender(newElement, oldElement);
+                    }
+                    else {
+                        UIRouter.rootRouter.render(newElement);
+                    }
+                    ;
                 }
                 else if (newElement) {
                     UIRouter.rootRouter.render(newElement);
                 }
                 else if (oldElement) {
-                    UIRouter.rootRouter.unrender(oldElement);
+                    if (oldElement.__get().parentNode) {
+                        UIRouter.rootRouter.unrender(oldElement);
+                    }
+                    ;
                 }
                 ;
             }
