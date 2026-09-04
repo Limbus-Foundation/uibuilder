@@ -35,8 +35,8 @@ export class UIBody {
         document.body.removeChild(element.__get());
     };
 
-    public static replaceRender = ( oldUIElement : UIElement, newUIElement : UIElement ) : void => {
-        document.body.replaceChild(newUIElement.__get(),oldUIElement.__get())
+    public static replaceRender = (newUIElement: UIElement, oldUIElement: UIElement): void => {
+        document.body.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
 
     public static style = ( style : UIStyle ) : CSSStyleDeclaration & UIStyleProperties => Object.assign(document.body.style, style.properties);

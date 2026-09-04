@@ -27,8 +27,8 @@ export class UIGeneric {
     public removeClassName = (className: string): void => void (this.htmlElement.classList.remove(className));
     public label = (label: string): void => void (this.htmlElement.textContent = label);
 
-    public replaceRender = ( oldUIElement : UIElement, newUIElement : UIElement ) : void => {
-        this.htmlElement.replaceChild(newUIElement.__get(),oldUIElement.__get())
+    public replaceRender = (newUIElement: UIElement, oldUIElement: UIElement): void => {
+        this.htmlElement.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
 
     public render = (element: UIElement | UIBlend, organization: UIAppendOrganization = "below"): void => {
