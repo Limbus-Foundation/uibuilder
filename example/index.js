@@ -62,10 +62,15 @@ counter1.state();
 const b = UIBuilder.button({ label: "Mudar texto" });
 
 UIBuilder.event(b).add("click", () => {
-    counter1.state({text: "BOMBOM"});
+    UIBuilder.router.navigate("/image");
 });
 
-UIBuilder.body.render(counter1);
+
+UIBuilder.router.base("/example");
+UIBuilder.router.route("/image",counter1);
+
+// UIBuilder.body.render(counter1);
+
 UIBuilder.body.render(b);
 
 const bodyStyle = UIBuilder.style({

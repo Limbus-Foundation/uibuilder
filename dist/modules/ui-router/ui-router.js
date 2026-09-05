@@ -8,13 +8,34 @@ export class UIRouter {
     static lastRouteContent = [];
     static registeredRouteList = [];
     static registeredOutRoute;
+    static listenRouteCallbackMap = new Map();
+    static basePath = "/";
     static elements = (element) => {
         if (element instanceof UIBlend)
             return [...element];
         return [element];
     };
+    static resolvePath = () => {
+        const pathname = window.location.pathname;
+        if (UIRouter.basePath === "/") {
+            return pathname;
+        }
+        ;
+        if (pathname === UIRouter.basePath) {
+            return "/";
+        }
+        ;
+        if (pathname.startsWith(`${UIRouter.basePath}/`)) {
+            return pathname.slice(UIRouter.basePath.length);
+        }
+        ;
+        return pathname;
+    };
     static root = (element) => {
         UIRouter.rootRouter = element;
+    };
+    static base = (path) => {
+        UIRouter.basePath = path === "/" ? "/" : `/${path.replace(/^\/|\/$/g, "")}`;
     };
     static route = (path, element) => {
         UIRouter.routes.set(path, element);
@@ -26,7 +47,7 @@ export class UIRouter {
     static navigate = (path) => {
         if (path === UIRouter.currentPath)
             return;
-        history.pushState({}, "", path);
+        history.pushState({}, "", `${UIRouter.basePath === "/" ? "" : UIRouter.basePath}${path}`);
         UIRouter.check();
     };
     static back = () => history.back();
@@ -34,8 +55,13 @@ export class UIRouter {
     static outRoute = (element) => {
         UIRouter.registeredOutRoute = element;
     };
+    static listenRoute = (path, callback) => {
+        const callbacks = UIRouter.listenRouteCallbackMap.get(path) ?? [];
+        callbacks.push(callback);
+        UIRouter.listenRouteCallbackMap.set(path, callbacks);
+    };
     static check = () => {
-        const path = window.location.pathname;
+        const path = UIRouter.resolvePath();
         if (path === UIRouter.currentPath)
             return;
         const current = UIRouter.routes.get(path);
@@ -80,6 +106,14 @@ export class UIRouter {
         ;
         UIRouter.lastRouteContent = elements;
         UIRouter.currentPath = path;
+        const callbacks = UIRouter.listenRouteCallbackMap.get(path);
+        if (callbacks) {
+            for (const callback of callbacks) {
+                callback();
+            }
+            ;
+        }
+        ;
     };
     static init = () => {
         window.addEventListener("popstate", UIRouter.check);

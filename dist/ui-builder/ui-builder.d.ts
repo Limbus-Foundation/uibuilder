@@ -388,6 +388,8 @@ export declare class UIBuilder {
         forward: () => void;
         init: () => void;
         root: (element: UIElement) => void;
+        listenRoute: (path: string, callback: () => void) => void;
+        base: (path: string) => void;
     };
     /**
     *

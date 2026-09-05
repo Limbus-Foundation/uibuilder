@@ -12,6 +12,8 @@ export class UIRouter {
     private static lastRouteContent: UIElement[] = [];
     private static registeredRouteList: string[] = [];
     private static registeredOutRoute: UIElement | UIBlend;
+    private static listenRouteCallbackMap = new Map<string, (() => void)[]>();
+    private static basePath: string = "/";
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
         if (element instanceof UIBlend) return [...element];
@@ -19,8 +21,32 @@ export class UIRouter {
         return [element];
     };
 
+    private static resolvePath = (): string => {
+
+        const pathname = window.location.pathname;
+
+        if (UIRouter.basePath === "/") {
+            return pathname;
+        };
+
+        if (pathname === UIRouter.basePath) {
+            return "/";
+        };
+
+        if (pathname.startsWith(`${UIRouter.basePath}/`)) {
+            return pathname.slice(UIRouter.basePath.length);
+        };
+
+        return pathname;
+    };
+
     public static root = (element: UIElement): void => {
         UIRouter.rootRouter = element;
+    };
+
+    public static base = (path: string): void => {
+
+        UIRouter.basePath = path === "/" ? "/" : `/${path.replace(/^\/|\/$/g, "")}`;
     };
 
     public static route = (path: string, element: UIElement | UIBlend): void => {
@@ -36,7 +62,7 @@ export class UIRouter {
 
         if (path === UIRouter.currentPath) return;
 
-        history.pushState({}, "", path);
+        history.pushState({}, "", `${UIRouter.basePath === "/" ? "" : UIRouter.basePath}${path}`);
         UIRouter.check();
     };
 
@@ -48,9 +74,18 @@ export class UIRouter {
         UIRouter.registeredOutRoute = element;
     };
 
+    public static listenRoute = (path: string, callback: () => void): void => {
+
+        const callbacks = UIRouter.listenRouteCallbackMap.get(path) ?? [];
+
+        callbacks.push(callback);
+
+        UIRouter.listenRouteCallbackMap.set(path, callbacks);
+    };
+
     private static check = (): void => {
 
-        const path = window.location.pathname;
+        const path = UIRouter.resolvePath();
 
         if (path === UIRouter.currentPath) return;
 
@@ -100,6 +135,14 @@ export class UIRouter {
 
         UIRouter.lastRouteContent = elements;
         UIRouter.currentPath = path;
+
+        const callbacks = UIRouter.listenRouteCallbackMap.get(path);
+
+        if (callbacks) {
+            for (const callback of callbacks) {
+                callback();
+            };
+        };
     };
 
     public static init = (): void => {

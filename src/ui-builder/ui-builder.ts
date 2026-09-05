@@ -411,7 +411,10 @@ export class UIBuilder {
         back: UIRouter.back,
         forward: UIRouter.forward,
         init: UIRouter.init,
-        root : UIRouter.root
+        root : UIRouter.root,
+        listenRoute : UIRouter.listenRoute,
+        base : UIRouter.base
+        
     };
 
      /**
