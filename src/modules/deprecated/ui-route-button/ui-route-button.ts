@@ -1,6 +1,17 @@
 // UI ANCHOR :
-import { UIGeneric } from "../ui-generic/ui-generic.js";
-import { UIRouter } from "../ui-router/ui-router.js";
+
+import { UIGeneric } from "../../ui-generic/ui-generic.js";
+import { UIRouter } from "../../ui-router/ui-router.js";
+
+export interface IUIRouteButton {
+    id?: string;
+    classList?: string[];
+    className?: string;
+    attribute?: { name: string; value: string }[];
+    label?: string;
+    path: string;
+}
+
 /**
  *
  * #### UIBuilder.UIRouteButton
@@ -28,34 +39,46 @@ import { UIRouter } from "../ui-router/ui-router.js";
  * @public
  */
 export class UIRouteButton extends UIGeneric {
-    element;
-    constructor(option) {
+
+    private element: HTMLAnchorElement;
+
+    constructor(option: IUIRouteButton) {
+
         const element = document.createElement("a");
+
         super(element);
+
         this.element = element;
-        if (option.id)
-            this.element.id = option.id;
-        if (option.className)
-            this.element.className = option.className;
+
+        if (option.id) this.element.id = option.id;
+
+        if (option.className) this.element.className = option.className;
+
         if (option.classList?.length) {
             this.element.classList.add(...option.classList);
         }
-        if (option.label)
-            this.element.textContent = option.label;
+
+        if (option.label) this.element.textContent = option.label;
+
         this.element.href = option.path;
+
         if (option.attribute) {
             for (const attribute of option.attribute) {
                 this.element.setAttribute(attribute.name, attribute.value);
             }
         }
+
         this.element.addEventListener("click", event => {
+
             event.preventDefault();
+
             UIRouter.navigate(option.path);
         });
     }
-    label = (label) => void (this.element.textContent = label);
-    path = (path) => {
+
+    public label = (label: string): void => void (this.element.textContent = label);
+
+    public path = (path: string): void => {
         this.element.href = path;
     };
 }
-//# sourceMappingURL=ui-route-button.js.map

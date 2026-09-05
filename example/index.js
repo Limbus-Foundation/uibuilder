@@ -57,21 +57,43 @@ const counter1 = counter({
     image: "https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"
 })
 
+const counter2 = counter({ 
+    text: "ROTA DOI",
+    image: "https://tsunamiaquarios.com.br/wp-content/uploads/2023/07/ocelaris1-e36334f608a5460cd716588010205094-1024-1024.jpg"
+})
+
 counter1.state();
 
-const b = UIBuilder.button({ label: "Mudar texto" });
-
-UIBuilder.event(b).add("click", () => {
-    UIBuilder.router.navigate("/image");
-});
-
+const b = UIBuilder.button({ label: "Rota Image" });
+const bB = UIBuilder.button({ label: "Rota Image 2" });
 
 UIBuilder.router.base("/example");
-UIBuilder.router.route("/image",counter1);
 
-// UIBuilder.body.render(counter1);
+UIBuilder.router.route("/image", counter1);
+UIBuilder.router.route("/image2/:age", counter2);
+
+UIBuilder.router.listenRoute("/image", () => {
+    console.log("Rota /image acessada");
+});
+
+UIBuilder.router.listenRoute("/image2", () => {
+    console.log("Rota /image2 acessada");
+}); 
+
+UIBuilder.router.listenParam("/image2", ({ age }) => {
+    console.log("Parametro age: ", age);
+});
+
+UIBuilder.event(b).add("click", () => {
+    UIBuilder.router.navigate("/image"); 
+});
+
+UIBuilder.event(bB).add("click", () => {
+    UIBuilder.router.navigate("/image2/12");
+});
 
 UIBuilder.body.render(b);
+UIBuilder.body.render(bB);
 
 const bodyStyle = UIBuilder.style({
     backgroundColor : "green",

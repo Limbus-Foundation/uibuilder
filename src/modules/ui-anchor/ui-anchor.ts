@@ -1,9 +1,9 @@
-// UI ROUTE BUTTON :
+// UI ANCHOR :
 
 import { UIGeneric } from "../ui-generic/ui-generic.js";
 import { UIRouter } from "../ui-router/ui-router.js";
 
-export interface IUIRouteButton {
+export interface IUIAnchor {
     id?: string;
     classList?: string[];
     className?: string;
@@ -14,11 +14,11 @@ export interface IUIRouteButton {
 
 /**
  *
- * #### UIBuilder.UIRouteButton
+ * #### UIBuilder.UIAnchor
  *
  * Wrapper class for creating and managing a route `<a>` element.
  *
- * The `UIRouteButton` navigates through `UIRouter` without reloading the page.
+ * The `UIAnchor` navigates through `UIRouter` without reloading the page.
  *
  * @param option - Configuration object to initialize the route button.
  * @param option.id - Unique ID for the HTML element.
@@ -30,7 +30,7 @@ export interface IUIRouteButton {
  *
  * @example
  * ```ts
- * const button = new UIRouteButton({
+ * const button = new UIAnchor({
  *     label: "Get Started",
  *     path: "/get-started"
  * });
@@ -38,11 +38,11 @@ export interface IUIRouteButton {
  *
  * @public
  */
-export class UIRouteButton extends UIGeneric {
+export class UIAnchor extends UIGeneric {
 
     private element: HTMLAnchorElement;
 
-    constructor(option: IUIRouteButton) {
+    constructor(option: IUIAnchor) {
 
         const element = document.createElement("a");
 

@@ -3,11 +3,11 @@ import { UIGeneric } from "../ui-generic/ui-generic.js";
 import { UIRouter } from "../ui-router/ui-router.js";
 /**
  *
- * #### UIBuilder.UIRouteButton
+ * #### UIBuilder.UIAnchor
  *
  * Wrapper class for creating and managing a route `<a>` element.
  *
- * The `UIRouteButton` navigates through `UIRouter` without reloading the page.
+ * The `UIAnchor` navigates through `UIRouter` without reloading the page.
  *
  * @param option - Configuration object to initialize the route button.
  * @param option.id - Unique ID for the HTML element.
@@ -19,7 +19,7 @@ import { UIRouter } from "../ui-router/ui-router.js";
  *
  * @example
  * ```ts
- * const button = new UIRouteButton({
+ * const button = new UIAnchor({
  *     label: "Get Started",
  *     path: "/get-started"
  * });
@@ -27,7 +27,7 @@ import { UIRouter } from "../ui-router/ui-router.js";
  *
  * @public
  */
-export class UIRouteButton extends UIGeneric {
+export class UIAnchor extends UIGeneric {
     element;
     constructor(option) {
         const element = document.createElement("a");
@@ -58,4 +58,4 @@ export class UIRouteButton extends UIGeneric {
         this.element.href = path;
     };
 }
-//# sourceMappingURL=ui-route-button.js.map
+//# sourceMappingURL=ui-anchor.js.map

@@ -7,19 +7,21 @@ import { UICustom } from "../modules/ui-custom/ui-custom.js";
 import { UIGroup } from '../modules/ui-group/ui-group.js';
 import { UIHtml } from "../modules/ui-html/ui-html.js";
 import { UIIcon } from "../modules/ui-icon/ui-icon.js";
-import { UIIconButton } from "../modules/ui-icon-button/ui-icon-button.js";
+import { UIIconButton } from "../modules/deprecated/ui-icon-button/ui-icon-button.js";
 import { UIImage } from "../modules/ui-image/ui-image.js";
 import { UILabel } from "../modules/ui-label/ui-label.js";
 import { UIPanel } from "../modules/ui-panel/ui-panel.js";
 import { UISlider } from '../modules/ui-slider/ui-slider.js';
-import { UITextField } from '../modules/ui-text-field/ui-text-field.js';
+import { UITextField } from '../modules/deprecated/ui-text-field/ui-text-field.js';
 import { UIComponent } from "../modules/ui-component/ui-component.js";
 import { UIBlend } from "../modules/ui-blend/ui-blend.js";
 import { UIStyle } from "../modules/ui-style/ui-style.js";
 import { UIWatcher } from "../modules/ui-watcher/ui-watcher.js";
 import { UIRouter } from "../modules/ui-router/ui-router.js";
 import { UIStore } from "../modules/ui-store/ui-store.js";
-import { UIRouteButton } from "../modules/ui-route-button/ui-route-button.js";
+import { UIAnchor } from "../modules/ui-anchor/ui-anchor.js";
+import { UIRouteButton } from "../modules/deprecated/ui-route-button/ui-route-button.js";
+import { UIField } from "../modules/ui-field/ui-field.js";
 /**
  * ### UIBuilder
  *
@@ -176,6 +178,8 @@ export class UIBuilder {
      * const buttonIcon = UIBuilder.iconButton({ className : "icon_class_name" });
      * ```
      * @public
+     * @deprecated
+     *
      */
     static iconButton = (option) => new UIIconButton(option);
     /**
@@ -260,8 +264,36 @@ export class UIBuilder {
      * ```
      *
      * @public
+     * @deprecated Use `anchor` instead.
      */
     static routeButton = (option) => new UIRouteButton(option);
+    /**
+     *
+     * #### UIBuilder.UIAnchor
+     *
+     * Wrapper class for creating and managing a route `<a>` element.
+     *
+     * The `UIAnchor` navigates through `UIRouter` without reloading the page.
+     *
+     * @param option - Configuration object to initialize the route button.
+     * @param option.id - Unique ID for the HTML element.
+     * @param option.className - Single class name string.
+     * @param option.classList - List of CSS class names.
+     * @param option.attribute - Custom HTML attributes.
+     * @param option.label - Link label.
+     * @param option.path - Route path.
+     *
+     * @example
+     * ```ts
+     * const button = new UIAnchor({
+     *     label: "Get Started",
+     *     path: "/get-started"
+     * });
+     * ```
+     *
+     * @public
+     */
+    static anchor = (option) => new UIAnchor(option);
     /**
      *
      * #### UIBuilder.UIPanel
@@ -346,8 +378,42 @@ export class UIBuilder {
      * ```ts
      * const password = UIBuilder.textField({ value: "value_name", type: "password"});
      * ```
+     * @deprecated Use `field` instead.
+     *
      */
     static textField = (option) => new UITextField(option);
+    /**
+     *
+     * ### UIBuilder.UIField
+     *
+     * Wrapper class for creating and managing an `HTMLInputElement`.
+     *
+     * @param option - Configuration object to initialize the input element.
+     * @param option.id - Unique ID for the HTML element.
+     * @param option.placeholder - Placeholder text.
+     * @param option.value - Default input value.
+     * @param option.type - Input type (`text`, `password`, or `number`).
+     * @param option.className - Single class name string.
+     * @param option.classList - List of CSS class names.
+     * @param option.attribute - Custom HTML attributes list.
+     *
+     * @see {@link UIField.id}
+     * @see {@link UIField.className}
+     * @see {@link UIField.classList}
+     * @see {@link UIField.attribute}
+     * @see {@link UIField.removeAttribute}
+     * @see {@link UIField.removeClassName}
+     * @see {@link UIField.value}
+     * @see {@link UIField.placeholder}
+     * @see {@link UIField.disable}
+     * @see {@link UIField.clear}
+     *
+     * @example
+     * ```ts
+     * const password = UIBuilder.textField({ value: "value_name", type: "password"});
+     * ```
+     */
+    static field = (option) => new UIField(option);
     /**
      * #### UIEvent
      *
@@ -394,7 +460,10 @@ export class UIBuilder {
         init: UIRouter.init,
         root: UIRouter.root,
         listenRoute: UIRouter.listenRoute,
-        base: UIRouter.base
+        base: UIRouter.base,
+        listenParam: UIRouter.listenParam,
+        listenQuery: UIRouter.listenQuery,
+        retarget: UIRouter.retarget
     };
     /**
     *

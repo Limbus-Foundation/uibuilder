@@ -1,3 +1,4 @@
+
 // UI ROUTER :
 
 import { UIElement } from "../ui-element/ui-element.js";
@@ -8,11 +9,14 @@ export class UIRouter {
 
     private static routes = new Map<string, UIElement | UIBlend>();
     private static currentPath: string = "";
+    private static currentQuery: string = "";
     private static rootRouter: UIElement | typeof UIBody = UIBody;
     private static lastRouteContent: UIElement[] = [];
     private static registeredRouteList: string[] = [];
     private static registeredOutRoute: UIElement | UIBlend;
     private static listenRouteCallbackMap = new Map<string, (() => void)[]>();
+    private static listenQueryCallbackMap = new Map<string, ((queries: Record<string, string>) => void)[]>();
+    private static listenParamCallbackMap = new Map<string, ((params: Record<string, string>) => void)[]>();
     private static basePath: string = "/";
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
@@ -40,6 +44,102 @@ export class UIRouter {
         return pathname;
     };
 
+    private static resolveQuery = (): Record<string, string> => {
+
+        const queries: Record<string, string> = {};
+
+        for (const [key, value] of new URLSearchParams(window.location.search)) {
+            queries[key] = value;
+        };
+
+        return queries;
+    };
+
+    private static matchRoute = (route: string, path: string): Record<string, string> | null => {
+
+        const routeParts = route.split("/").filter(Boolean);
+        const pathParts = path.split("/").filter(Boolean);
+
+        if (routeParts.length !== pathParts.length) {
+
+            if (route === "/" && path === "/") {
+                return {};
+            };
+
+            return null;
+        };
+
+        const params: Record<string, string> = {};
+
+        for (let index = 0; index < routeParts.length; index++) {
+
+            const routePart = routeParts[index];
+            const pathPart = pathParts[index];
+
+            if (routePart.startsWith(":")) {
+
+                const paramName = routePart.slice(1);
+
+                if (!paramName) {
+                    return null;
+                };
+
+                params[paramName] = decodeURIComponent(pathPart);
+
+                continue;
+            };
+
+            if (routePart !== pathPart) {
+                return null;
+            };
+        };
+
+        return params;
+    };
+
+    private static resolveRoute = (path: string): { route: string; element: UIElement | UIBlend; params: Record<string, string> } | null => {
+
+        const routes = [...UIRouter.routes.entries()].sort((a, b) => {
+
+            const aDynamic = a[0].split("/").filter(part => part.startsWith(":")).length;
+            const bDynamic = b[0].split("/").filter(part => part.startsWith(":")).length;
+
+            return aDynamic - bDynamic;
+        });
+
+        for (const [route, element] of routes) {
+
+            const params = UIRouter.matchRoute(route, path);
+
+            if (params) {
+                return {
+                    route,
+                    element,
+                    params
+                };
+            };
+        };
+
+        return null;
+    };
+
+    private static resolveRouteBase = (route: string): string => {
+
+        const parts = route.split("/").filter(Boolean);
+        const base: string[] = [];
+
+        for (const part of parts) {
+
+            if (part.startsWith(":")) {
+                break;
+            };
+
+            base.push(part);
+        };
+
+        return base.length === 0 ? "/" : `/${base.join("/")}`;
+    };
+
     public static root = (element: UIElement): void => {
         UIRouter.rootRouter = element;
     };
@@ -60,9 +160,19 @@ export class UIRouter {
 
     public static navigate = (path: string): void => {
 
-        if (path === UIRouter.currentPath) return;
+        const url = `${UIRouter.basePath === "/" ? "" : UIRouter.basePath}${path}`;
 
-        history.pushState({}, "", `${UIRouter.basePath === "/" ? "" : UIRouter.basePath}${path}`);
+        if (path === UIRouter.currentPath && !window.location.search) return;
+
+        history.pushState({}, "", url);
+        UIRouter.check();
+    };
+
+    public static retarget = (path: string): void => {
+
+        const url = `${UIRouter.basePath === "/" ? "" : UIRouter.basePath}${path}`;
+
+        history.replaceState({}, "", url);
         UIRouter.check();
     };
 
@@ -83,64 +193,123 @@ export class UIRouter {
         UIRouter.listenRouteCallbackMap.set(path, callbacks);
     };
 
+    public static listenQuery = (path: string, callback: (queries: Record<string, string>) => void): void => {
+
+        const callbacks = UIRouter.listenQueryCallbackMap.get(path) ?? [];
+
+        callbacks.push(callback);
+
+        UIRouter.listenQueryCallbackMap.set(path, callbacks);
+    };
+
+    public static listenParam = (path: string, callback: (params: Record<string, string>) => void): void => {
+
+        const callbacks = UIRouter.listenParamCallbackMap.get(path) ?? [];
+
+        callbacks.push(callback);
+
+        UIRouter.listenParamCallbackMap.set(path, callbacks);
+    };
+
     private static check = (): void => {
 
         const path = UIRouter.resolvePath();
+        const query = window.location.search;
 
-        if (path === UIRouter.currentPath) return;
+        const pathChanged = path !== UIRouter.currentPath;
+        const queryChanged = query !== UIRouter.currentQuery;
 
-        const current = UIRouter.routes.get(path);
+        if (!pathChanged && !queryChanged) return;
+
+        const resolvedRoute = UIRouter.resolveRoute(path);
+        const current = resolvedRoute?.element;
         const next = current ?? UIRouter.registeredOutRoute;
 
-        if (!next) return;
+        if (pathChanged) {
 
-        const elements = UIRouter.elements(next);
-        const previous = UIRouter.lastRouteContent;
+            if (!next) return;
 
-        if (previous.length === 0) {
+            const elements = UIRouter.elements(next);
+            const previous = UIRouter.lastRouteContent;
 
-            for (const element of elements) {
-                UIRouter.rootRouter.render(element);
+            if (previous.length === 0) {
+
+                for (const element of elements) {
+                    UIRouter.rootRouter.render(element);
+                };
+
+            } else {
+
+                const length = Math.max(previous.length, elements.length);
+
+                for (let index = 0; index < length; index++) {
+
+                    const oldElement = previous[index];
+                    const newElement = elements[index];
+
+                    if (oldElement && newElement) {
+
+                        if (oldElement.__get().parentNode) {
+                            UIRouter.rootRouter.replaceRender(newElement, oldElement);
+                        } else {
+                            UIRouter.rootRouter.render(newElement);
+                        };
+
+                    } else if (newElement) {
+
+                        UIRouter.rootRouter.render(newElement);
+
+                    } else if (oldElement) {
+
+                        if (oldElement.__get().parentNode) {
+                            UIRouter.rootRouter.unrender(oldElement);
+                        };
+                    };
+                };
             };
 
-        } else {
+            UIRouter.lastRouteContent = elements;
+            UIRouter.currentPath = path;
 
-            const length = Math.max(previous.length, elements.length);
+            const routeBase = resolvedRoute ? UIRouter.resolveRouteBase(resolvedRoute.route) : path;
 
-            for (let index = 0; index < length; index++) {
+            const routeCallbacks = UIRouter.listenRouteCallbackMap.get(routeBase);
 
-                const oldElement = previous[index];
-                const newElement = elements[index];
+            if (routeCallbacks) {
 
-                if (oldElement && newElement) {
+                for (const callback of routeCallbacks) {
+                    callback();
+                };
+            };
 
-                    if (oldElement.__get().parentNode) {
-                        UIRouter.rootRouter.replaceRender(newElement, oldElement);
-                    } else {
-                        UIRouter.rootRouter.render(newElement);
-                    };
+            if (resolvedRoute) {
 
-                } else if (newElement) {
+                const routeBase = UIRouter.resolveRouteBase(resolvedRoute.route);
+                const paramCallbacks = UIRouter.listenParamCallbackMap.get(routeBase);
 
-                    UIRouter.rootRouter.render(newElement);
+                if (paramCallbacks) {
 
-                } else if (oldElement) {
-
-                    if (oldElement.__get().parentNode) {
-                        UIRouter.rootRouter.unrender(oldElement);
+                    for (const callback of paramCallbacks) {
+                        callback(resolvedRoute.params);
                     };
                 };
             };
         };
 
-        UIRouter.lastRouteContent = elements;
-        UIRouter.currentPath = path;
+        UIRouter.currentQuery = query;
 
-        const callbacks = UIRouter.listenRouteCallbackMap.get(path);
+        if (resolvedRoute) {
 
-        if (callbacks) {
-            for (const callback of callbacks) {
-                callback();
+            const routeBase = UIRouter.resolveRouteBase(resolvedRoute.route);
+            const queryCallbacks = UIRouter.listenQueryCallbackMap.get(routeBase);
+
+            if (queryCallbacks) {
+
+                const queries = UIRouter.resolveQuery();
+
+                for (const callback of queryCallbacks) {
+                    callback(queries);
+                };
             };
         };
     };

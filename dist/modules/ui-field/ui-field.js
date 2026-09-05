@@ -1,21 +1,9 @@
 // UI TEXT FIELD :
-
 import { UIGeneric } from "../ui-generic/ui-generic.js";
-
-export interface IUITextField {
-    id?: string;
-    placeholder?: string;
-    value?: string;
-    type?: "text" | "password" | "number";
-    classList?: string[];
-    className?: string;
-    attribute?: { name: string; value: string }[];
-}
-
 /**
- * 
- * #### UIBuilder.UITextField
- * 
+ *
+ * #### UIBuilder.UIField
+ *
  * Wrapper class for creating and managing an `HTMLInputElement`.
  *
  * @param option - Configuration object to initialize the input element.
@@ -29,46 +17,39 @@ export interface IUITextField {
  *
  * @example
  * ```ts
- * const password = new UITextField({ value: "1234", type: "password", id: "myId" });
+ * const password = new UIField({ value: "1234", type: "password", id: "myId" });
  * ```
  */
-export class UITextField extends UIGeneric {
-
-    private element: HTMLInputElement;
-
-    constructor(option?: IUITextField) {
-
+export class UIField extends UIGeneric {
+    element;
+    constructor(option) {
         const element = document.createElement("input");
-
         super(element);
-
         this.element = element;
-
         this.element.type = option?.type || "text";
-
-        if (option?.id) this.element.id = option.id;
-        if (option?.placeholder) this.element.placeholder = option.placeholder;
-        if (option?.value) this.element.value = option.value;
-        if (option?.className) this.element.className = option.className;
-
+        if (option?.id)
+            this.element.id = option.id;
+        if (option?.placeholder)
+            this.element.placeholder = option.placeholder;
+        if (option?.value)
+            this.element.value = option.value;
+        if (option?.className)
+            this.element.className = option.className;
         if (option?.classList?.length) {
             this.element.classList.add(...option.classList);
         }
-
         if (option?.attribute) {
             Object.entries(option.attribute).forEach(([name, value]) => {
                 this.element.setAttribute(name, String(value));
             });
         }
     }
-
-    public value = (val?: string): string => {
-        if (val !== undefined) this.element.value = val;
+    value = (val) => {
+        if (val !== undefined)
+            this.element.value = val;
         return this.element.value;
     };
-
-    public placeholder = (ph: string): void => void (this.element.placeholder = ph);
-
-    public disable = (state: boolean): void => void (this.element.disabled = state);
-
+    placeholder = (ph) => void (this.element.placeholder = ph);
+    disable = (state) => void (this.element.disabled = state);
 }
+//# sourceMappingURL=ui-field.js.map
