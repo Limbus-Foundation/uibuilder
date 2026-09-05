@@ -1,8 +1,8 @@
-<img width="100%" alt="html-bake-repo-banner (1)" src="https://github.com/user-attachments/assets/6b504859-2a1c-4bd8-abd1-00ff84aacef3" />
+<img width="100%" alt="html-bake-repo-banner (1)" src="https://github.com/user-attachments/assets/2fb46069-0ba5-4b0e-96dd-d0e46399bee8" />
 
 # UIBuilder
 
-HTML Element Wrapper for JavaScript / TypeScript.
+DOM Wrapper for JavaScript / TypeScript.
 
 UIBuilder provides a direct API for creating, manipulating and composing HTML elements without requiring a virtual DOM or a component rendering system.
 
@@ -35,7 +35,6 @@ UIBuilder focuses on providing **low-level UI primitives** that can be composed 
 | `store`       | —                               | Provides state store creation.                       |
 | `watcher`     | —                               | Provides value and store observation.                |
 
-> Specialized components such as `UIIconButton` are not part of the main primitive API. UIBuilder favors composition of primitive elements instead.
 
 ---
 
