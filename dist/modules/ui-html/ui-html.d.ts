@@ -15,7 +15,7 @@ import { UIElement } from "../ui-element/ui-element.js";
 export declare class UIHtml {
     /**
      *
-     * ### parseUIElement
+     * ### parseHTMLElement
      *
      * Converts a UIElement into its native HTMLElement.
      *
@@ -25,5 +25,6 @@ export declare class UIHtml {
      * @public
      * @static
      */
-    static parseUIElement: (element: UIElement) => HTMLElement;
+    static parseHTMLElement: (element: UIElement) => HTMLElement;
+    static parseUIElement: (element: HTMLElement) => UIElement;
 }

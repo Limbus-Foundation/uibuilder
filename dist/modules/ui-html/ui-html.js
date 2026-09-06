@@ -1,4 +1,5 @@
 // UI HTML : 
+import { UICustom } from "../ui-custom/ui-custom.js";
 /**
  *
  * ### UIHtml
@@ -15,7 +16,7 @@
 export class UIHtml {
     /**
      *
-     * ### parseUIElement
+     * ### parseHTMLElement
      *
      * Converts a UIElement into its native HTMLElement.
      *
@@ -25,7 +26,12 @@ export class UIHtml {
      * @public
      * @static
      */
-    static parseUIElement = (element) => element.__get();
+    static parseHTMLElement = (element) => element.__get();
+    static parseUIElement = (element) => {
+        return new UICustom({
+            tag: element.tagName.toLowerCase()
+        });
+    };
 }
 ;
 //# sourceMappingURL=ui-html.js.map

@@ -1,20 +1,20 @@
 
-// UI APPEND :
+// UI RENDER :
 
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
 
-export type UIAppendOrganization = "above" | "below";
+export type UIRenderOrganization = "above" | "below";
 
-export class UIAppend {
+export class UIRender {
 
-    constructor(parent: HTMLElement, children: UIElement | UIBlend, organization: UIAppendOrganization) {
+    constructor(parent: HTMLElement, children: UIElement | UIBlend, organization: UIRenderOrganization) {
 
         if (children instanceof UIBlend) {
 
             for (const element of children) {
                 organization === "above" ? parent.prepend(element.__get()) : parent.appendChild(element.__get());
-                element.__invokeRenderListen();
+                element.__invokeListenRender();
             };
 
             return;
@@ -22,6 +22,6 @@ export class UIAppend {
 
         organization === "above" ? parent.prepend(children.__get()): parent.appendChild(children.__get());
 
-        children.__invokeRenderListen();
+        children.__invokeListenRender();
     };
 };

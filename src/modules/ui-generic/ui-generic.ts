@@ -1,6 +1,6 @@
 // UI GENERIC : 
 
-import { UIAppend, UIAppendOrganization } from "../ui-append/ui-append.js";
+import { UIRender, UIRenderOrganization } from "../ui-render/ui-render.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
 import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
@@ -31,14 +31,13 @@ export class UIGeneric {
         this.htmlElement.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
 
-    public render = (element: UIElement | UIBlend, organization: UIAppendOrganization = "below"): void => {
+    public render = (element: UIElement | UIBlend, organization: UIRenderOrganization = "below"): void => {
 
-        new UIAppend(this.htmlElement, element, organization);
-
+        new UIRender(this.htmlElement, element, organization);
 
     };
 
-    public __invokeUnrenderListen = () : void => {
+    public __invokeListenUnrender = () : void => {
         
         if (this.rendered) {
             this.rendered = false;
@@ -46,7 +45,7 @@ export class UIGeneric {
         };
     };
 
-    public __invokeRenderListen = () : void => {
+    public __invokeListenRender = () : void => {
         if (!this.rendered) {
             this.rendered = true;
             for (const callback of this.renderCallbacks) callback();
@@ -59,21 +58,21 @@ export class UIGeneric {
 
             for (const el of element) {
                 this.htmlElement.removeChild(el.__get());
-                el.__invokeUnrenderListen();
+                el.__invokeListenUnrender();
             };
 
             return; 
         };
 
         this.htmlElement.removeChild(element.__get());
-        element.__invokeUnrenderListen();
+        element.__invokeListenUnrender();
     };
 
-    public renderListen = (callback: () => void): void => {
+    public listenRender = (callback: () => void): void => {
         this.renderCallbacks.push(callback);
     };
 
-    public unrenderListen = (callback: () => void): void => {
+    public listenUnrender = (callback: () => void): void => {
         this.unrenderCallbacks.push(callback);
     };
 

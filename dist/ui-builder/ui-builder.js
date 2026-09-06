@@ -10,7 +10,7 @@ import { UIIcon } from "../modules/ui-icon/ui-icon.js";
 import { UIIconButton } from "../modules/deprecated/ui-icon-button/ui-icon-button.js";
 import { UIImage } from "../modules/ui-image/ui-image.js";
 import { UILabel } from "../modules/ui-label/ui-label.js";
-import { UIPanel } from "../modules/ui-panel/ui-panel.js";
+import { UIPanel } from "../modules/deprecated/ui-panel/ui-panel.js";
 import { UISlider } from '../modules/ui-slider/ui-slider.js';
 import { UITextField } from '../modules/deprecated/ui-text-field/ui-text-field.js';
 import { UIComponent } from "../modules/ui-component/ui-component.js";
@@ -319,6 +319,7 @@ export class UIBuilder {
      * const panel = UIBuilder.panel({ className : "class_name" });
      * ```
      * @public
+     * @deprecated - use 'group'
      */
     static panel = (option) => new UIPanel(option);
     /**
@@ -463,7 +464,8 @@ export class UIBuilder {
         base: UIRouter.base,
         listenParam: UIRouter.listenParam,
         listenQuery: UIRouter.listenQuery,
-        retarget: UIRouter.retarget
+        retarget: UIRouter.retarget,
+        listenAllRoute: UIRouter.listenAllRoute
     };
     /**
     *
@@ -524,7 +526,8 @@ export class UIBuilder {
     static body = {
         render: UIBody.render,
         unrender: UIBody.unrender,
-        style: UIBody.style
+        style: UIBody.style,
+        body: UIBody
     };
     /**
      *
@@ -574,7 +577,8 @@ export class UIBuilder {
      * @static
      */
     static html = {
-        parseHTMLElement: UIHtml.parseUIElement
+        parseHTMLElement: UIHtml.parseHTMLElement,
+        parseUIElement: UIHtml.parseUIElement
     };
 }
 ;

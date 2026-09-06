@@ -1,7 +1,8 @@
-import { UIAppend, UIAppendOrganization } from "../ui-append/ui-append.js";
+import { UIRenderOrganization } from "../ui-render/ui-render.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
 import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
+export type EventCallback<K extends keyof HTMLElementEventMap> = (e: HTMLElementEventMap[K]) => void;
 /**
  *
  * ### UIBody
@@ -18,8 +19,9 @@ import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
  * @static
  */
 export declare class UIBody {
-    static render: (element: UIElement | UIBlend, organization?: UIAppendOrganization) => UIAppend;
+    static render: (element: UIElement | UIBlend, organization?: UIRenderOrganization) => void;
     static unrender: (element: UIElement | UIBlend) => void;
     static replaceRender: (newUIElement: UIElement, oldUIElement: UIElement) => void;
     static style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
+    static __get: () => HTMLBodyElement;
 }

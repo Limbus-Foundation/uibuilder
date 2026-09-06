@@ -1,6 +1,8 @@
 
 // UI HTML : 
 
+import { UIBody } from "../ui-body/ui-body.js";
+import { UICustom } from "../ui-custom/ui-custom.js";
 import { UIElement } from "../ui-element/ui-element.js";
 
 /**
@@ -20,7 +22,7 @@ export class UIHtml {
 
     /**
      * 
-     * ### parseUIElement
+     * ### parseHTMLElement
      * 
      * Converts a UIElement into its native HTMLElement.
      *
@@ -28,7 +30,15 @@ export class UIHtml {
      * @param element - UIElement
      *
      * @public
-     * @static
+     * @static 
      */
-    public static parseUIElement = ( element : UIElement ) : HTMLElement => element.__get();
+    public static parseHTMLElement = ( element : UIElement ) : HTMLElement => element.__get();
+
+    public static parseUIElement = (element: HTMLElement): UIElement => {
+
+        return new UICustom({
+            tag: element.tagName.toLowerCase() as keyof HTMLElementTagNameMap
+        });
+
+    };
 };   

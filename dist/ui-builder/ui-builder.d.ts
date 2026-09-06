@@ -1,3 +1,4 @@
+import { UIBody } from "../modules/ui-body/ui-body.js";
 import { UIEvent } from '../modules/ui-event/ui-event.js';
 import { IUIButton, UIButton } from "../modules/ui-button/ui-button.js";
 import { IUICustom, UICustom } from "../modules/ui-custom/ui-custom.js";
@@ -6,7 +7,7 @@ import { IUIcon, UIIcon } from "../modules/ui-icon/ui-icon.js";
 import { IUIIconButton, UIIconButton } from "../modules/deprecated/ui-icon-button/ui-icon-button.js";
 import { IUIImage, UIImage } from "../modules/ui-image/ui-image.js";
 import { UILabel, IUILabel } from "../modules/ui-label/ui-label.js";
-import { IUIPanel, UIPanel } from "../modules/ui-panel/ui-panel.js";
+import { IUIPanel, UIPanel } from "../modules/deprecated/ui-panel/ui-panel.js";
 import { IUISlider, UISlider } from '../modules/ui-slider/ui-slider.js';
 import { IUITextField, UITextField } from '../modules/deprecated/ui-text-field/ui-text-field.js';
 import { UIElement } from "../modules/ui-element/ui-element.js";
@@ -314,6 +315,7 @@ export declare class UIBuilder {
      * const panel = UIBuilder.panel({ className : "class_name" });
      * ```
      * @public
+     * @deprecated - use 'group'
      */
     static panel: (option: IUIPanel) => UIPanel;
     /**
@@ -459,6 +461,7 @@ export declare class UIBuilder {
         listenParam: (path: string, callback: (params: Record<string, string>) => void) => void;
         listenQuery: (path: string, callback: (queries: Record<string, string>) => void) => void;
         retarget: (path: string) => void;
+        listenAllRoute: (callback: (route: string) => void) => void;
     };
     /**
     *
@@ -517,9 +520,10 @@ export declare class UIBuilder {
      * @static
      */
     static body: {
-        render: (element: UIElement | UIBlend, organization?: import("../modules/ui-append/ui-append.js").UIAppendOrganization) => import("../modules/ui-append/ui-append.js").UIAppend;
+        render: (element: UIElement | UIBlend, organization?: import("../modules/ui-render/ui-render.js").UIRenderOrganization) => void;
         unrender: (element: UIElement | UIBlend) => void;
         style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
+        body: typeof UIBody;
     };
     /**
      *
@@ -570,5 +574,6 @@ export declare class UIBuilder {
      */
     static html: {
         parseHTMLElement: (element: UIElement) => HTMLElement;
+        parseUIElement: (element: HTMLElement) => UIElement;
     };
 }

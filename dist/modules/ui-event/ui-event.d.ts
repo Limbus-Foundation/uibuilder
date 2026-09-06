@@ -1,3 +1,4 @@
+import { UIBody } from "../ui-body/ui-body.js";
 import { UIElement } from "../ui-element/ui-element.js";
 export type EventCallback<K extends keyof HTMLElementEventMap> = (e: HTMLElementEventMap[K]) => void;
 /**
@@ -11,7 +12,7 @@ export type EventCallback<K extends keyof HTMLElementEventMap> = (e: HTMLElement
  */
 export declare class UIEvent {
     private element;
-    constructor(element: UIElement);
+    constructor(element: UIElement | typeof UIBody);
     /**
      * ### add
      *

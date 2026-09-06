@@ -12,7 +12,7 @@ import { IUIcon, UIIcon } from "../modules/ui-icon/ui-icon.js";
 import { IUIIconButton, UIIconButton } from "../modules/deprecated/ui-icon-button/ui-icon-button.js";
 import { IUIImage, UIImage } from "../modules/ui-image/ui-image.js";
 import { UILabel, IUILabel } from "../modules/ui-label/ui-label.js";
-import { IUIPanel, UIPanel } from "../modules/ui-panel/ui-panel.js";
+import { IUIPanel, UIPanel } from "../modules/deprecated/ui-panel/ui-panel.js";
 import { IUISlider, UISlider } from '../modules/ui-slider/ui-slider.js';
 import { IUITextField, UITextField } from '../modules/deprecated/ui-text-field/ui-text-field.js';
 import { UIElement } from "../modules/ui-element/ui-element.js";
@@ -334,6 +334,7 @@ export class UIBuilder {
      * const panel = UIBuilder.panel({ className : "class_name" });
      * ```
      * @public
+     * @deprecated - use 'group'
      */
     public static panel = (option: IUIPanel): UIPanel => new UIPanel(option);
 
@@ -484,7 +485,8 @@ export class UIBuilder {
         base : UIRouter.base,
         listenParam : UIRouter.listenParam,
         listenQuery : UIRouter.listenQuery,
-        retarget : UIRouter.retarget
+        retarget : UIRouter.retarget,
+        listenAllRoute : UIRouter.listenAllRoute
     };
 
      /**
@@ -525,7 +527,7 @@ export class UIBuilder {
      * 
      * @param CSSStyleDeclaration
      * 
-     * @returns `CSSStyleDeclaration`.
+     * @returns `CSSStyleDeclaration`. 
      *
      * @see {@link UIStyle}
      * @public
@@ -544,12 +546,13 @@ export class UIBuilder {
      * @see {@link UIBody.append}
      * @see {@link UIBody.prepend}
      * @public
-     * @static
+     * @static 
      */
     public static body = {
         render : UIBody.render,
         unrender : UIBody.unrender,
-        style: UIBody.style
+        style: UIBody.style,
+        body : UIBody
     };
 
     /**
@@ -602,7 +605,8 @@ export class UIBuilder {
      * @static
      */
     public static html = {
-        parseHTMLElement : UIHtml.parseUIElement
+        parseHTMLElement : UIHtml.parseHTMLElement,
+        parseUIElement : UIHtml.parseUIElement
     };
 
 

@@ -1,5 +1,5 @@
 // UI GENERIC : 
-import { UIAppend } from "../ui-append/ui-append.js";
+import { UIRender } from "../ui-render/ui-render.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIStyle } from "../ui-style/ui-style.js";
 export class UIGeneric {
@@ -23,9 +23,9 @@ export class UIGeneric {
         this.htmlElement.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
     render = (element, organization = "below") => {
-        new UIAppend(this.htmlElement, element, organization);
+        new UIRender(this.htmlElement, element, organization);
     };
-    __invokeUnrenderListen = () => {
+    __invokeListenUnrender = () => {
         if (this.rendered) {
             this.rendered = false;
             for (const callback of this.unrenderCallbacks)
@@ -33,7 +33,7 @@ export class UIGeneric {
         }
         ;
     };
-    __invokeRenderListen = () => {
+    __invokeListenRender = () => {
         if (!this.rendered) {
             this.rendered = true;
             for (const callback of this.renderCallbacks)
@@ -45,19 +45,19 @@ export class UIGeneric {
         if (element instanceof UIBlend) {
             for (const el of element) {
                 this.htmlElement.removeChild(el.__get());
-                el.__invokeUnrenderListen();
+                el.__invokeListenUnrender();
             }
             ;
             return;
         }
         ;
         this.htmlElement.removeChild(element.__get());
-        element.__invokeUnrenderListen();
+        element.__invokeListenUnrender();
     };
-    renderListen = (callback) => {
+    listenRender = (callback) => {
         this.renderCallbacks.push(callback);
     };
-    unrenderListen = (callback) => {
+    listenUnrender = (callback) => {
         this.unrenderCallbacks.push(callback);
     };
     remove = () => this.htmlElement.remove();

@@ -13,10 +13,14 @@ export class UIRouter {
     static listenQueryCallbackMap = new Map();
     static listenParamCallbackMap = new Map();
     static basePath = "/";
+    static listenAllRouteCallbackList = [];
     static elements = (element) => {
         if (element instanceof UIBlend)
             return [...element];
         return [element];
+    };
+    static listenAllRoute = (callback) => {
+        UIRouter.listenAllRouteCallbackList.push(callback);
     };
     static resolvePath = () => {
         const pathname = window.location.pathname;
@@ -204,6 +208,10 @@ export class UIRouter {
             ;
             UIRouter.lastRouteContent = elements;
             UIRouter.currentPath = path;
+            for (const callback of UIRouter.listenAllRouteCallbackList) {
+                callback(resolvedRoute ? UIRouter.resolveRouteBase(resolvedRoute.route) : path);
+            }
+            ;
             const routeBase = resolvedRoute ? UIRouter.resolveRouteBase(resolvedRoute.route) : path;
             const routeCallbacks = UIRouter.listenRouteCallbackMap.get(routeBase);
             if (routeCallbacks) {
@@ -214,7 +222,6 @@ export class UIRouter {
             }
             ;
             if (resolvedRoute) {
-                const routeBase = UIRouter.resolveRouteBase(resolvedRoute.route);
                 const paramCallbacks = UIRouter.listenParamCallbackMap.get(routeBase);
                 if (paramCallbacks) {
                     for (const callback of paramCallbacks) {

@@ -1,5 +1,5 @@
 // UI BODY :
-import { UIAppend } from "../ui-append/ui-append.js";
+import { UIRender } from "../ui-render/ui-render.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 /**
  *
@@ -17,19 +17,23 @@ import { UIBlend } from "../ui-blend/ui-blend.js";
  * @static
  */
 export class UIBody {
-    static render = (element, organization = "below") => new UIAppend(document.body, element, organization);
+    static render = (element, organization = "below") => {
+        new UIRender(document.body, element, organization);
+    };
     static unrender = (element) => {
         if (element instanceof UIBlend) {
             for (const el of element)
                 document.body.removeChild(el.__get());
             return;
         }
+        ;
         document.body.removeChild(element.__get());
     };
     static replaceRender = (newUIElement, oldUIElement) => {
         document.body.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
     static style = (style) => Object.assign(document.body.style, style.properties);
+    static __get = () => document.body;
 }
 ;
 //# sourceMappingURL=ui-body.js.map

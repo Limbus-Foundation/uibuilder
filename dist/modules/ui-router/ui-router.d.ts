@@ -12,7 +12,9 @@ export declare class UIRouter {
     private static listenQueryCallbackMap;
     private static listenParamCallbackMap;
     private static basePath;
+    private static listenAllRouteCallbackList;
     private static elements;
+    static listenAllRoute: (callback: (route: string) => void) => void;
     private static resolvePath;
     private static resolveQuery;
     private static matchRoute;

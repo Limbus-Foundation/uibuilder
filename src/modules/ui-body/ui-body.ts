@@ -1,10 +1,13 @@
 
 // UI BODY :
 
-import { UIAppend, UIAppendOrganization } from "../ui-append/ui-append.js";
+import { UIRender, UIRenderOrganization } from "../ui-render/ui-render.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIElement } from "../ui-element/ui-element.js";
-import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
+import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";  
+
+export type EventCallback<K extends keyof HTMLElementEventMap> = (e: HTMLElementEventMap[K]) => void;
+
 
 /** 
  * 
@@ -23,14 +26,16 @@ import { UIStyle, UIStyleProperties } from "../ui-style/ui-style.js";
  */
 export class UIBody {
     
-    public static render = (element: UIElement | UIBlend, organization : UIAppendOrganization = "below" ): UIAppend => new UIAppend(document.body, element, organization);
+    public static render = (element: UIElement | UIBlend, organization : UIRenderOrganization = "below" ): void => {
+        new UIRender(document.body, element, organization);
+    }
     
     public static unrender = (element: UIElement | UIBlend): void => {
 
         if (element instanceof UIBlend) {
             for (const el of element) document.body.removeChild(el.__get());
             return;
-        }
+        };
 
         document.body.removeChild(element.__get());
     };
@@ -40,5 +45,10 @@ export class UIBody {
     };
 
     public static style = ( style : UIStyle ) : CSSStyleDeclaration & UIStyleProperties => Object.assign(document.body.style, style.properties);
+
+    public static __get = (): HTMLBodyElement => document.body as HTMLBodyElement;
+
+
     
 };
+

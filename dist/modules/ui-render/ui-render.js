@@ -1,6 +1,6 @@
-// UI APPEND :
+// UI RENDER :
 import { UIBlend } from "../ui-blend/ui-blend.js";
-export class UIAppend {
+export class UIRender {
     constructor(parent, children, organization) {
         if (children instanceof UIBlend) {
             for (const element of children) {
@@ -17,4 +17,4 @@ export class UIAppend {
     ;
 }
 ;
-//# sourceMappingURL=ui-append.js.map
+//# sourceMappingURL=ui-render.js.map

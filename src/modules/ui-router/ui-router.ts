@@ -18,11 +18,16 @@ export class UIRouter {
     private static listenQueryCallbackMap = new Map<string, ((queries: Record<string, string>) => void)[]>();
     private static listenParamCallbackMap = new Map<string, ((params: Record<string, string>) => void)[]>();
     private static basePath: string = "/";
+    private static listenAllRouteCallbackList: ((route: string) => void)[] = [];
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
         if (element instanceof UIBlend) return [...element];
 
         return [element];
+    };
+
+    public static listenAllRoute = (callback: (route: string) => void): void => {
+        UIRouter.listenAllRouteCallbackList.push(callback);
     };
 
     private static resolvePath = (): string => {
@@ -269,7 +274,11 @@ export class UIRouter {
             };
 
             UIRouter.lastRouteContent = elements;
-            UIRouter.currentPath = path;
+            UIRouter.currentPath = path; 
+ 
+            for (const callback of UIRouter.listenAllRouteCallbackList) {
+                callback(resolvedRoute ? UIRouter.resolveRouteBase(resolvedRoute.route) : path);
+            };
 
             const routeBase = resolvedRoute ? UIRouter.resolveRouteBase(resolvedRoute.route) : path;
 
@@ -284,7 +293,6 @@ export class UIRouter {
 
             if (resolvedRoute) {
 
-                const routeBase = UIRouter.resolveRouteBase(resolvedRoute.route);
                 const paramCallbacks = UIRouter.listenParamCallbackMap.get(routeBase);
 
                 if (paramCallbacks) {

@@ -22,8 +22,14 @@ const count = UIBuilder.watcher.watch(0, value => {
 count.value = 10;
 count.value = 20;
 
-UIBuilder.watcher.unwatch(count); 
+UIBuilder.watcher.unwatch(count);   
 
+UIBuilder.router.listenAllRoute((route)=>{
+    console.log("Rota acessada: ", route);
+})
+
+
+UIBuilder.event(UIBuilder.body.body).add("click", () => console.log("Body clicked"));
 
 UIBuilder.event(range).add("input", () => label.label(UIBuilder.html.parseHTMLElement(range).value)); 
 
@@ -35,10 +41,10 @@ const counter = UIBuilder.component(({ text, image }, self) => {
 
     img.style({ width: "200px", height: "400px" });
 
-    label.renderListen(()=> console.log("Label renderizado"));
-    button.renderListen(()=> console.log("Button renderizado"));
+    label.listenRender(()=> console.log("Label renderizado"));
+    button.listenRender(()=> console.log("Button renderizado"));
 
-    let count = 0;   
+    let count = 0;    
 
     self.stateListen(state => label.label(state.text));
     self.stateListen(state => img.src(state.image));
