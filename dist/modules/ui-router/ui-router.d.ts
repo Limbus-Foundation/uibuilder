@@ -13,7 +13,6 @@ export declare class UIRouter {
     private static listenParamCallbackMap;
     private static basePath;
     private static listenAllRouteCallbackList;
-    private static hasHashRoute;
     private static elements;
     static listenAllRoute: (callback: (route: string) => void) => void;
     private static resolvePath;
@@ -32,7 +31,8 @@ export declare class UIRouter {
     static listenRoute: (path: string, callback: () => void) => void;
     static listenQuery: (path: string, callback: (queries: Record<string, string>) => void) => void;
     static listenParam: (path: string, callback: (params: Record<string, string>) => void) => void;
-    static resolveHashRoute: () => void;
+    private static restoreRootScroll;
+    private static resolveHashRoute;
     private static check;
     static init: () => void;
 }

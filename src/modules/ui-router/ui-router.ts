@@ -4,7 +4,6 @@
 import { UIElement } from "../ui-element/ui-element.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIBody } from "../ui-body/ui-body.js";
-import { UIBuilder } from '../../ui-builder/ui-builder';
 
 export class UIRouter {
 
@@ -20,12 +19,10 @@ export class UIRouter {
     private static listenParamCallbackMap = new Map<string, ((params: Record<string, string>) => void)[]>();
     private static basePath: string = "/";
     private static listenAllRouteCallbackList: ((route: string) => void)[] = [];
-    private static hasHashRoute : boolean = false;
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
         if (element instanceof UIBlend) return [...element];
-
-        return [element];
+        return [element]; 
     };
 
     public static listenAllRoute = (callback: (route: string) => void): void => {
@@ -218,7 +215,9 @@ export class UIRouter {
         UIRouter.listenParamCallbackMap.set(path, callbacks);
     };
 
-    public static resolveHashRoute = (): void => {
+    private static restoreRootScroll = () : number => UIRouter.rootRouter.__get().scrollTop = 0;
+
+    private static resolveHashRoute = (): void => {
 
         const hash = window.location.hash;
 
@@ -227,14 +226,15 @@ export class UIRouter {
             return;
         };
 
-        UIRouter.rootRouter.__get().scrollTop = 0;
+        UIRouter.restoreRootScroll();
 
-    };
+    };  
 
     private static check = (): void => { 
 
         const path = UIRouter.resolvePath();
-        const query = window.location.search; 
+
+        const query = window.location.search;
 
         const pathChanged = path !== UIRouter.currentPath;
         const queryChanged = query !== UIRouter.currentQuery;
@@ -335,6 +335,9 @@ export class UIRouter {
                 };
             };
         };
+
+        UIRouter.resolveHashRoute();
+        
     };
 
     public static init = (): void => {
@@ -342,7 +345,6 @@ export class UIRouter {
         window.addEventListener("popstate", UIRouter.check);
 
         UIRouter.check();
-        UIRouter.resolveHashRoute();
     };
 
 };

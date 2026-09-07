@@ -14,7 +14,6 @@ export class UIRouter {
     static listenParamCallbackMap = new Map();
     static basePath = "/";
     static listenAllRouteCallbackList = [];
-    static hasHashRoute = false;
     static elements = (element) => {
         if (element instanceof UIBlend)
             return [...element];
@@ -158,6 +157,7 @@ export class UIRouter {
         callbacks.push(callback);
         UIRouter.listenParamCallbackMap.set(path, callbacks);
     };
+    static restoreRootScroll = () => UIRouter.rootRouter.__get().scrollTop = 0;
     static resolveHashRoute = () => {
         const hash = window.location.hash;
         if (hash) {
@@ -165,7 +165,7 @@ export class UIRouter {
             return;
         }
         ;
-        UIRouter.rootRouter.__get().scrollTop = 0;
+        UIRouter.restoreRootScroll();
     };
     static check = () => {
         const path = UIRouter.resolvePath();
@@ -258,11 +258,11 @@ export class UIRouter {
             ;
         }
         ;
+        UIRouter.resolveHashRoute();
     };
     static init = () => {
         window.addEventListener("popstate", UIRouter.check);
         UIRouter.check();
-        UIRouter.resolveHashRoute();
     };
 }
 ;
