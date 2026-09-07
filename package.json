@@ -11,7 +11,7 @@
     "html-element",
     "html"
   ],
-  "homepage": "https://github.com/Limbus-Foundation/uibuilder#readme",
+  "homepage": "https://uibuilderdoc.vercel.app/",
   "bugs": {
     "url": "https://github.com/Limbus-Foundation/uibuilder/issues"
   },
@@ -34,6 +34,6 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "remixicon": "^4.9.1"
+
   }
 }

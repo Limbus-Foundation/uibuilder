@@ -14,6 +14,7 @@ export class UIRouter {
     static listenParamCallbackMap = new Map();
     static basePath = "/";
     static listenAllRouteCallbackList = [];
+    static hasHashRoute = false;
     static elements = (element) => {
         if (element instanceof UIBlend)
             return [...element];
@@ -157,6 +158,15 @@ export class UIRouter {
         callbacks.push(callback);
         UIRouter.listenParamCallbackMap.set(path, callbacks);
     };
+    static resolveHashRoute = () => {
+        const hash = window.location.hash;
+        if (hash) {
+            document.querySelector(hash)?.scrollIntoView();
+            return;
+        }
+        ;
+        UIRouter.rootRouter.__get().scrollTop = 0;
+    };
     static check = () => {
         const path = UIRouter.resolvePath();
         const query = window.location.search;
@@ -252,6 +262,8 @@ export class UIRouter {
     static init = () => {
         window.addEventListener("popstate", UIRouter.check);
         UIRouter.check();
+        UIRouter.resolveHashRoute();
     };
 }
+;
 //# sourceMappingURL=ui-router.js.map

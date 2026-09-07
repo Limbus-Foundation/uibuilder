@@ -4,6 +4,7 @@
 import { UIElement } from "../ui-element/ui-element.js";
 import { UIBlend } from "../ui-blend/ui-blend.js";
 import { UIBody } from "../ui-body/ui-body.js";
+import { UIBuilder } from '../../ui-builder/ui-builder';
 
 export class UIRouter {
 
@@ -19,6 +20,7 @@ export class UIRouter {
     private static listenParamCallbackMap = new Map<string, ((params: Record<string, string>) => void)[]>();
     private static basePath: string = "/";
     private static listenAllRouteCallbackList: ((route: string) => void)[] = [];
+    private static hasHashRoute : boolean = false;
 
     private static elements = (element: UIElement | UIBlend): UIElement[] => {
         if (element instanceof UIBlend) return [...element];
@@ -216,10 +218,23 @@ export class UIRouter {
         UIRouter.listenParamCallbackMap.set(path, callbacks);
     };
 
-    private static check = (): void => {
+    public static resolveHashRoute = (): void => {
+
+        const hash = window.location.hash;
+
+        if (hash) {
+            document.querySelector(hash)?.scrollIntoView();
+            return;
+        };
+
+        UIRouter.rootRouter.__get().scrollTop = 0;
+
+    };
+
+    private static check = (): void => { 
 
         const path = UIRouter.resolvePath();
-        const query = window.location.search;
+        const query = window.location.search; 
 
         const pathChanged = path !== UIRouter.currentPath;
         const queryChanged = query !== UIRouter.currentQuery;
@@ -327,6 +342,7 @@ export class UIRouter {
         window.addEventListener("popstate", UIRouter.check);
 
         UIRouter.check();
+        UIRouter.resolveHashRoute();
     };
 
-}
+};
