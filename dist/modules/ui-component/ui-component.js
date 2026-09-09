@@ -1,32 +1,32 @@
 // UI COMPONENT :
 /**
 *
-* #### UIBuilder.UIButton
+* #### UIBuilder.UIComponent
+* @see {@link https://uibuilderdoc.vercel.app/component}
 *
-* Wrapper class for creating and managing an `HtmlButtonElement `.
+* Create a multi-instance UIElement group (component).
 *
 * @param option - Configuration object to initialize the input element.
-* @param option.id - Unique ID for the HTML element.
-* @param option.className - Single class name string.
-* @param option.classList - List of CSS class names.
-* @param option.attribute - Custom HTML attributes list.
-* @param option.text - Button label
 *
-* @see {@link UIButton.id}
-* @see {@link UIButton.className}
-* @see {@link UIButton.classList}
-* @see {@link UIButton.attribute}
-* @see {@link UIButton.removeAttribute}
-* @see {@link UIButton.removeClassName}
-* @see {@link UIButton.remove}
-* @see {@link UIButton.append}
-* @see {@link UIButton.label}
+* @public
 *
 * @example
 * ```ts
-* const btn = UIBuilder.button({ text : "label" });
+* const card  = UIBuilder.component(({ title } , self ) => {
+*
+*      const cardContainer = UIBuilder.group({ className : "card"});
+*      const cardTitle = UIBuilder.label({ label : title });
+*
+*      cardContainer.render(cardTitle);
+*
+*      return cardContainer;
+* })
+*
+* const card1 = card({ title : "Hello World"});
+*
+* UIBuilder.body.render(card1)
+*
 * ```
-* @public
 */
 export function UIComponent(comp) {
     return (initialState = {}) => {
