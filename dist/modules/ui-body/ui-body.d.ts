@@ -23,5 +23,4 @@ export declare class UIBody {
     static unrender: (element: UIElement | UIBlend) => void;
     static replaceRender: (newUIElement: UIElement, oldUIElement: UIElement) => void;
     static style: (style: UIStyle) => CSSStyleDeclaration & UIStyleProperties;
-    static __get: () => HTMLBodyElement;
 }

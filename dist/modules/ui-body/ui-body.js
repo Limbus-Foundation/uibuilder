@@ -33,6 +33,15 @@ export class UIBody {
         document.body.replaceChild(newUIElement.__get(), oldUIElement.__get());
     };
     static style = (style) => Object.assign(document.body.style, style.properties);
+    /**
+     * #### __get();
+     *
+     * internal ( soft-private ) function to get the real instance of an element.
+     *
+     * @see {@link UIGeneric.__get}
+     *
+     * @internal
+     */
     static __get = () => document.body;
 }
 ;

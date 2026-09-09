@@ -14,30 +14,10 @@ export class UIEvent {
         this.element = element;
     }
     ;
-    /**
-     * ### add
-     *
-     * Adiciona um ouvinte de evento ao elemento vinculado.
-     *
-     * @param event - Nome do evento HTML.
-     * @param callback - Função executada quando o evento dispara.
-     * @returns `this` (permite encadeamento de métodos).
-     * @public
-     */
     add = (event, callback) => {
         this.element.__get().addEventListener(event, callback);
         return this;
     };
-    /**
-     * ### remove
-     *
-     * Remove um ouvinte de evento do elemento vinculado.
-     *
-     * @param event - Nome do evento HTML.
-     * @param callback - Referência da função callback que foi vinculada.
-     * @returns `this` (permite encadeamento de métodos).
-     * @public
-     */
     remove = (event, callback) => {
         this.element.__get().removeEventListener(event, callback);
         return this;

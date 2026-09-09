@@ -1,15 +1,36 @@
+
 // UI COMPONENT :
 
-export function UIComponent<T extends object, P extends Record<string, any>>(
-    build: (
-        props: P,
-        self: {
-            stateListen: (callback: (state: P) => void) => void;
-        }
-    ) => T
-): (props?: Partial<P>) => T & {
-    state(state: Partial<P>): void;
-} {
+ /**
+ * 
+ * #### UIBuilder.UIButton
+ * 
+ * Wrapper class for creating and managing an `HtmlButtonElement `.
+ *
+ * @param option - Configuration object to initialize the input element.
+ * @param option.id - Unique ID for the HTML element.
+ * @param option.className - Single class name string.
+ * @param option.classList - List of CSS class names.
+ * @param option.attribute - Custom HTML attributes list.
+ * @param option.text - Button label
+ * 
+ * @see {@link UIButton.id}
+ * @see {@link UIButton.className}
+ * @see {@link UIButton.classList}
+ * @see {@link UIButton.attribute}
+ * @see {@link UIButton.removeAttribute}
+ * @see {@link UIButton.removeClassName}
+ * @see {@link UIButton.remove}
+ * @see {@link UIButton.append}
+ * @see {@link UIButton.label}
+ *
+ * @example
+ * ```ts
+ * const btn = UIBuilder.button({ text : "label" });
+ * ```
+ * @public
+ */
+export function UIComponent<T extends object, P extends Record<string, any>>( comp : ( props: P, self: { stateListen: (callback: (state: P) => void) => void;}) => T) : (props?: Partial<P>) => T & { state(state: Partial<P>): void; } {
 
     return (initialState = {}) => {
 
@@ -23,7 +44,7 @@ export function UIComponent<T extends object, P extends Record<string, any>>(
             }
         };
 
-        const component = build(state, self); 
+        const component = comp (state, self); 
 
         const result = component as T & {
             state(state: Partial<P>): void;
@@ -32,11 +53,11 @@ export function UIComponent<T extends object, P extends Record<string, any>>(
         result.state = (value) => {
             state = { ...state, ...value };
 
-            for (const listener of listeners) {
-                listener(state);
-            }
+            for (const listener of listeners) listener(state);
+            
         };
 
         return result;
     };
-}
+
+};

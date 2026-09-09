@@ -25,6 +25,15 @@ export class UIGeneric {
     render = (element, organization = "below") => {
         new UIRender(this.htmlElement, element, organization);
     };
+    /**
+    * #### __invokeListenRender();
+    *
+    * internal ( soft-private ) function to invoke listen unrender
+    *
+    * @see {@link UIGeneric.__get}
+    *
+    * @internal
+    */
     __invokeListenUnrender = () => {
         if (this.rendered) {
             this.rendered = false;
@@ -33,6 +42,15 @@ export class UIGeneric {
         }
         ;
     };
+    /**
+     * #### __invokeListenRender();
+     *
+     * internal ( soft-private ) function to invoke listen render
+     *
+     * @see {@link UIGeneric.__get}
+     *
+     * @internal
+     */
     __invokeListenRender = () => {
         if (!this.rendered) {
             this.rendered = true;
@@ -62,6 +80,15 @@ export class UIGeneric {
     };
     remove = () => this.htmlElement.remove();
     clear = () => (this.htmlElement.innerHTML = "");
+    /**
+     * #### __get();
+     *
+     * internal ( soft-private ) function to get the real instance of an element.
+     *
+     * @see {@link UIGeneric.__get}
+     *
+     * @internal
+     */
     __get = () => this.htmlElement;
     style = (style) => Object.assign(this.htmlElement.style, style instanceof UIStyle ? style.properties : style);
 }

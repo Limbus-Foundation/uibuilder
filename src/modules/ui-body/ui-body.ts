@@ -46,6 +46,15 @@ export class UIBody {
 
     public static style = ( style : UIStyle ) : CSSStyleDeclaration & UIStyleProperties => Object.assign(document.body.style, style.properties);
 
+    /**
+     * #### __get();
+     * 
+     * internal ( soft-private ) function to get the real instance of an element.
+     * 
+     * @see {@link UIGeneric.__get}
+     *
+     * @internal
+     */
     public static __get = (): HTMLBodyElement => document.body as HTMLBodyElement;
 
 

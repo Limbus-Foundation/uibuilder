@@ -13,26 +13,6 @@ export type EventCallback<K extends keyof HTMLElementEventMap> = (e: HTMLElement
 export declare class UIEvent {
     private element;
     constructor(element: UIElement | typeof UIBody);
-    /**
-     * ### add
-     *
-     * Adiciona um ouvinte de evento ao elemento vinculado.
-     *
-     * @param event - Nome do evento HTML.
-     * @param callback - Função executada quando o evento dispara.
-     * @returns `this` (permite encadeamento de métodos).
-     * @public
-     */
     add: <K extends keyof HTMLElementEventMap>(event: K, callback: EventCallback<K>) => this;
-    /**
-     * ### remove
-     *
-     * Remove um ouvinte de evento do elemento vinculado.
-     *
-     * @param event - Nome do evento HTML.
-     * @param callback - Referência da função callback que foi vinculada.
-     * @returns `this` (permite encadeamento de métodos).
-     * @public
-     */
     remove: <K extends keyof HTMLElementEventMap>(event: K, callback: EventCallback<K>) => this;
 }

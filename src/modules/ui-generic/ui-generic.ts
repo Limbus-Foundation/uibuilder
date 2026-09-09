@@ -37,6 +37,15 @@ export class UIGeneric {
 
     };
 
+     /**
+     * #### __invokeListenRender();
+     * 
+     * internal ( soft-private ) function to invoke listen unrender
+     * 
+     * @see {@link UIGeneric.__get}
+     *
+     * @internal
+     */
     public __invokeListenUnrender = () : void => {
         
         if (this.rendered) {
@@ -45,6 +54,15 @@ export class UIGeneric {
         };
     };
 
+    /**
+     * #### __invokeListenRender();
+     * 
+     * internal ( soft-private ) function to invoke listen render
+     * 
+     * @see {@link UIGeneric.__get}
+     *
+     * @internal
+     */
     public __invokeListenRender = () : void => {
         if (!this.rendered) {
             this.rendered = true;
@@ -78,6 +96,16 @@ export class UIGeneric {
 
     public remove = (): void => this.htmlElement.remove();
     public clear = (): string => (this.htmlElement.innerHTML = "");
+
+    /**
+     * #### __get();
+     * 
+     * internal ( soft-private ) function to get the real instance of an element.
+     * 
+     * @see {@link UIGeneric.__get}
+     *
+     * @internal
+     */
     public __get = (): HTMLElement => this.htmlElement;
 
     public style = (style: UIStyle | UIStyleProperties): CSSStyleDeclaration & UIStyleProperties =>
