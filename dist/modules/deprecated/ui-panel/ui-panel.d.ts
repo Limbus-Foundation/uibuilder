@@ -1,4 +1,4 @@
-import { UIGeneric } from "../../ui-generic/ui-generic.js";
+import { UIGeneric } from "../../internal/ui-generic/ui-generic.js";
 export interface IUIPanel {
     id?: string;
     classList?: string[];

@@ -1,7 +1,7 @@
 // UI ANCHOR :
 
-import { UIGeneric } from "../../ui-generic/ui-generic.js";
-import { UIRouter } from "../../ui-router/ui-router.js";
+import { UIGeneric } from "../../internal/ui-generic/ui-generic.js";
+import { UIRouter } from "../../util/ui-router/ui-router.js";
 
 export interface IUIRouteButton {
     id?: string;

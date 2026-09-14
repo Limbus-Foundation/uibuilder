@@ -22,11 +22,11 @@
   "license": "MIT",
   "author": "Limbus Foundation",
   "type": "commonjs",
-  "types": "./dist/ui-builder/ui-builder.d.ts",
-  "main": "./dist/ui-builder/ui-builder.js",
+  "types": "./dist/ui-builder.d.ts",
+  "main": "./dist/ui-builder.js",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch",
+    "dev": "tsc --watch",
     "test": "node example/index.js"
   },
   "devDependencies": {

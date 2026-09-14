@@ -1,7 +1,7 @@
 
 // UI BUILDER EXAMPLE : 
 
-import { UIBuilder } from "../dist/ui-builder/ui-builder.js";
+import { UIBuilder } from "../dist/ui-builder.js";
 
 const button = UIBuilder.button({ label : "hello world"});
 
@@ -47,7 +47,7 @@ const counter = UIBuilder.component(({ text, image }, self) => {
     let count = 0;    
 
     self.stateListen(state => label.label(state.text));
-    self.stateListen(state => img.src(state.image));
+    self.stateListen(state => img.src(state.image)); 
 
     UIBuilder.event(button).add("click", () => {
         count++;
@@ -56,7 +56,6 @@ const counter = UIBuilder.component(({ text, image }, self) => {
 
     return UIBuilder.blend(label, button, img);
 });
-
 
 const counter1 = counter({ 
     text: "Click para adicionar ao contador",
@@ -115,6 +114,18 @@ UIBuilder.watcher.watch(store, value => {
 });
 
 store.get.count++;
+
+const spn = UIBuilder.label({ label: "HELLO WORLD", className : "jjj" }); 
+
+UIBuilder.body.render(spn);
+
+const Spanim = UIBuilder.html.rendered(spn); 
+
+const newSpanim = UIBuilder.html.parseUIElement(Spanim); 
+
+newSpanim.style({ color: "red", fontSize: "30px" });
+
+newSpanim.content("HELLO WORLD 2");
 
 UIBuilder.body.style(bodyStyle);
 
