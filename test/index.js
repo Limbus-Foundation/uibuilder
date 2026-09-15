@@ -212,7 +212,7 @@ const tab2 = UIBuilder.label({ label: "Tab 2" });
 const tabButton1 = UIBuilder.button({ label: "Tab 1" });
 const tabButton2 = UIBuilder.button({ label: "Tab 2" });
 
-const switcher = UIBuilder.switcher();
+const switcher = UIBuilder.switcher(); 
 
 switcher.root(switcherRoot);
 
