@@ -26,6 +26,7 @@ import { UIIconButton } from "./modules/deprecated/ui-icon-button/ui-icon-button
 import { UIPanel } from "./modules/deprecated/ui-panel/ui-panel.js";
 import { UITextField } from './modules/deprecated/ui-text-field/ui-text-field.js';
 import { UIRouteButton } from "./modules/deprecated/ui-route-button/ui-route-button.js";
+import { UISwitcher } from "./modules/method/ui-switcher/ui-switcher.js";
 /**
  * ### UIBuilder
  *
@@ -460,7 +461,7 @@ export class UIBuilder {
     static router = {
         route: UIRouter.route,
         navigate: UIRouter.navigate,
-        back: UIRouter.back,
+        backward: UIRouter.back,
         forward: UIRouter.forward,
         init: UIRouter.init,
         root: UIRouter.root,
@@ -485,6 +486,20 @@ export class UIBuilder {
     static store = {
         set: UIStore.set
     };
+    /**
+     *
+     * ### UISwitcher
+     *
+     * Creates and returns a reference to a `UISwitcher`.
+     *
+     * @returns `UISwitcher`.
+     *
+     * @see {@link UISwitcher}
+     *
+     * @public
+     * @static
+     */
+    static switcher = () => new UISwitcher();
     /**
      *
      * #### UIBlend
@@ -577,6 +592,7 @@ export class UIBuilder {
      *
      * @see {@link UIHtml}
      * @see {@link UIHtml.parseUIElement} - convert an UIBuilder Element in a HTMLElement
+     * @see {@link UIHtml.parseHTMLElement} - convert an HTMLElement in a UIElement
      * @public
      * @static
      */

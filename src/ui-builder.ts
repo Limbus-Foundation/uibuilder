@@ -41,6 +41,7 @@ import { IUIRouteButton, UIRouteButton } from "./modules/deprecated/ui-route-but
 
 import { UIElement } from "./modules/internal/ui-element/ui-element.js";
 import { UIRender } from "./modules/internal/ui-render/ui-render.js";
+import { UISwitcher } from "./modules/method/ui-switcher/ui-switcher.js";
 
 /**
  * ### UIBuilder 
@@ -493,7 +494,7 @@ export class UIBuilder {
     public static router = {
         route: UIRouter.route,
         navigate: UIRouter.navigate,
-        back: UIRouter.back,
+        backward: UIRouter.back,
         forward: UIRouter.forward,
         init: UIRouter.init,
         root : UIRouter.root,
@@ -519,6 +520,22 @@ export class UIBuilder {
     public static store = {
         set : UIStore.set
     };
+
+    /**
+     * 
+     * ### UISwitcher
+     * 
+     * Creates and returns a reference to a `UISwitcher`.
+     *
+     * @returns `UISwitcher`.
+     *
+     * @see {@link UISwitcher}
+     *
+     * @public
+     * @static
+     */
+    public static switcher = (): UISwitcher => new UISwitcher();
+
 
     /**
      * 
@@ -617,6 +634,7 @@ export class UIBuilder {
      * 
      * @see {@link UIHtml}
      * @see {@link UIHtml.parseUIElement} - convert an UIBuilder Element in a HTMLElement
+     * @see {@link UIHtml.parseHTMLElement} - convert an HTMLElement in a UIElement
      * @public
      * @static 
      */

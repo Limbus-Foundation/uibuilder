@@ -15,6 +15,7 @@ export class UIRender {
             for (const element of children) {
                 organization === "above" ? parent.prepend(element.__get()) : parent.appendChild(element.__get());
                 element.__invokeListenRender();
+                element.__setRenderedPlace(parent);
             };
 
             return;
@@ -22,6 +23,7 @@ export class UIRender {
 
         organization === "above" ? parent.prepend(children.__get()): parent.appendChild(children.__get());
 
+        children.__setRenderedPlace(parent);
         children.__invokeListenRender();
     };
 };

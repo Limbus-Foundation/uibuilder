@@ -99,15 +99,7 @@ export class UIGeneric {
     };
 
     public render = (element: UIElement | UIBlend, organization: UIRenderOrganization = "below"): void => {
-
         new UIRender(this.htmlElement, element, organization);
-
-        // if(element instanceof UIBlend){
-        //     for ( const el in element){
-        //         el.__set
-        //     }
-        // }
-
     };
 
     public replaceSelfRender = (element: UIElement): void => {
@@ -130,6 +122,8 @@ export class UIGeneric {
             for (const callback of this.unrenderCallbacks) callback();
         };
     };
+
+    // public switchRender = ()
 
     /**
      * #### __invokeListenRender();
@@ -168,6 +162,7 @@ export class UIGeneric {
                 };
 
                 this.htmlElement.removeChild(el.__get());
+                el.__setRenderedPlace(null)
                 el.__invokeListenUnrender();
             };
 
@@ -180,6 +175,7 @@ export class UIGeneric {
         };
 
         this.htmlElement.removeChild(element.__get());
+        element.__setRenderedPlace(null);
         element.__invokeListenUnrender();
     }; 
 

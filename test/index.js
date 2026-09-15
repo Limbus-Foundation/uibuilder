@@ -121,13 +121,38 @@ UIBuilder.body.render(spn);
 
 const Spanim = UIBuilder.html.rendered(spn); 
 
-const newSpanim = UIBuilder.html.parseUIElement(Spanim); 
+const newSpanim = UIBuilder.html.parseUIElement(Spanim);
 
 newSpanim.style({ color: "red", fontSize: "30px" });
 
 newSpanim.content("HELLO WORLD 2");
 
 UIBuilder.body.style(bodyStyle);
+
+const tab1 = UIBuilder.group({});
+
+tab1.style({ width: "400px", height: "400px", border : "1px solid black" });
+
+const tab1Label = UIBuilder.label({ label: "Tab 1" });
+const tab1Label2 = UIBuilder.label({ label: "Tab 2" });
+
+const btn1 = UIBuilder.button({ label: "Tab 1" });
+const btn2 = UIBuilder.button({ label: "Tab 2" });
+
+const switcher1 = UIBuilder.switcher();
+
+switcher1.root(tab1);
+
+switcher1.register({tab1Label, tab1Label2});
+
+UIBuilder.event(btn1).add("click", () => switcher1.switch(tab1Label));
+UIBuilder.event(btn2).add("click", () => switcher1.switch(tab1Label2));
+
+UIBuilder.body.render(tab1);
+UIBuilder.body.render(btn1);
+UIBuilder.body.render(btn2);
+
+
 
 
 // console.log(counter("Click para adicionar ao contador")); 

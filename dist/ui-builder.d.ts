@@ -18,6 +18,7 @@ import { IUIPanel, UIPanel } from "./modules/deprecated/ui-panel/ui-panel.js";
 import { IUITextField, UITextField } from './modules/deprecated/ui-text-field/ui-text-field.js';
 import { IUIRouteButton, UIRouteButton } from "./modules/deprecated/ui-route-button/ui-route-button.js";
 import { UIElement } from "./modules/internal/ui-element/ui-element.js";
+import { UISwitcher } from "./modules/method/ui-switcher/ui-switcher.js";
 /**
  * ### UIBuilder
  *
@@ -452,7 +453,7 @@ export declare class UIBuilder {
     static router: {
         route: (path: string, element: UIElement | UIBlend) => void;
         navigate: (path: string) => void;
-        back: () => void;
+        backward: () => void;
         forward: () => void;
         init: () => void;
         root: (element: UIElement) => void;
@@ -477,6 +478,20 @@ export declare class UIBuilder {
     static store: {
         set: <T extends object>(initial: T) => UIStore<T>;
     };
+    /**
+     *
+     * ### UISwitcher
+     *
+     * Creates and returns a reference to a `UISwitcher`.
+     *
+     * @returns `UISwitcher`.
+     *
+     * @see {@link UISwitcher}
+     *
+     * @public
+     * @static
+     */
+    static switcher: () => UISwitcher;
     /**
      *
      * #### UIBlend
@@ -569,6 +584,7 @@ export declare class UIBuilder {
      *
      * @see {@link UIHtml}
      * @see {@link UIHtml.parseUIElement} - convert an UIBuilder Element in a HTMLElement
+     * @see {@link UIHtml.parseHTMLElement} - convert an HTMLElement in a UIElement
      * @public
      * @static
      */
