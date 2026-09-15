@@ -518,8 +518,12 @@ export class UIBuilder {
      * @public
      */
     public static store = {
-        set : UIStore.set
-    };
+        sector : UIStore.sector,
+        get : UIStore.get,
+        set : UIStore.set,
+        listenSector : UIStore.listenSector
+    }
+    
 
     /**
      * 

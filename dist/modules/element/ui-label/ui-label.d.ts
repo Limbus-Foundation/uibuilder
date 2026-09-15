@@ -8,6 +8,7 @@ export interface IUILabel {
         value: string;
     }[];
     label?: string;
+    content?: string;
 }
 /**
  *
@@ -21,6 +22,7 @@ export interface IUILabel {
  * @param option.classList - List of CSS class names.
  * @param option.attribute - Custom HTML attributes list.
  * @param option.label - label text.
+ * @param option.content - label text.
  *
  * @example
  * ```ts

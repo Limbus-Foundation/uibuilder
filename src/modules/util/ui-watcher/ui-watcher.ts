@@ -1,7 +1,5 @@
 // UI WATCHER :
 
-import { UIStore } from "../ui-store/ui-store.js";
-
 export type UIWatcherCallback<T> = (value: T) => void;
 
 export class UIWatcher {
@@ -9,30 +7,6 @@ export class UIWatcher {
     private static watchers = new Map<object, UIWatcherCallback<any>>();
 
     public static watch = <T>(value: T, callback: UIWatcherCallback<T>) => {
-
-        if (value instanceof UIStore) {
-
-            const proxy = new Proxy(value.get, {
-                set: (target, property, newValue) => {
-
-                    const oldValue = target[property as keyof T];
-
-                    target[property as keyof T] = newValue;
-
-                    if (oldValue !== newValue) {
-                        UIWatcher.watchers.get(proxy)?.(proxy);
-                    }
-
-                    return true;
-                }
-            });
-
-            value.get = proxy;
-
-            UIWatcher.watchers.set(proxy, callback);
-
-            return proxy;
-        }
 
         const state = {
             value
@@ -62,4 +36,4 @@ export class UIWatcher {
         UIWatcher.watchers.delete(value as object);
     };
 
-}
+};

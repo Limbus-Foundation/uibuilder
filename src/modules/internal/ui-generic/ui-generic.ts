@@ -1,3 +1,4 @@
+
 // UI GENERIC : 
 
 import { UIRender, UIRenderOrganization } from "../ui-render/ui-render.js";
@@ -41,8 +42,6 @@ export class UIGeneric {
     private __parseClassName = (classNameList: string): void => {
         this.htmlElement.classList.add(...classNameList.trim().split(/\s+/));
     };
-
-
 
     public id = (id: string): void => {
         this.htmlElement.id = id;

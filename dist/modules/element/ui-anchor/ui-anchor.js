@@ -15,6 +15,7 @@ import { UIRouter } from "../../util/ui-router/ui-router.js";
  * @param option.classList - List of CSS class names.
  * @param option.attribute - Custom HTML attributes.
  * @param option.label - Link label.
+ * @param option.content - content.
  * @param option.path - Route path.
  *
  * @example
@@ -42,6 +43,8 @@ export class UIAnchor extends UIGeneric {
         }
         if (option.label)
             this.element.textContent = option.label;
+        if (option.content)
+            this.element.textContent = option.content;
         this.element.href = option.path;
         if (option.attribute) {
             for (const attribute of option.attribute) {
@@ -53,7 +56,7 @@ export class UIAnchor extends UIGeneric {
             UIRouter.navigate(option.path);
         });
     }
-    label = (label) => void (this.element.textContent = label);
+    ;
     path = (path) => {
         this.element.href = path;
     };

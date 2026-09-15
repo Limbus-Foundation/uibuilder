@@ -8,7 +8,6 @@ import { IUISlider, UISlider } from './modules/element/ui-slider/ui-slider.js';
 import { UIAnchor, IUIAnchor } from "./modules/element/ui-anchor/ui-anchor.js";
 import { IUIField, UIField } from "./modules/element/ui-field/ui-field.js";
 import { UIBody } from "./modules/util/ui-body/ui-body.js";
-import { UIStore } from "./modules/util/ui-store/ui-store.js";
 import { UIEvent } from './modules/method/ui-event/ui-event.js';
 import { UIComponent } from "./modules/method/ui-component/ui-component.js";
 import { UIBlend } from "./modules/method/ui-blend/ui-blend.js";
@@ -476,7 +475,10 @@ export declare class UIBuilder {
     * @public
     */
     static store: {
-        set: <T extends object>(initial: T) => UIStore<T>;
+        sector: (sectorName: string) => void;
+        get: <T>(sectorName: string, dataName: string) => T | undefined;
+        set: (sectorName: string, dataName: string, dataValue: any) => void;
+        listenSector: (sectorName: string, callback: (sectorName: string, dataName: string, dataValue: any, compare: (dataName: string, dataValue?: any) => boolean) => void) => void;
     };
     /**
      *
@@ -555,7 +557,9 @@ export declare class UIBuilder {
      * @static
      */
     static watcher: {
-        watch: <T>(value: T, callback: import("./modules/util/ui-watcher/ui-watcher.js").UIWatcherCallback<T>) => any;
+        watch: <T>(value: T, callback: import("./modules/util/ui-watcher/ui-watcher.js").UIWatcherCallback<T>) => {
+            value: T;
+        };
         unwatch: <T>(value: T) => void;
     };
     /**

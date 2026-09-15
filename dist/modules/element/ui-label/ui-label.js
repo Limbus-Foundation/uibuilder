@@ -13,6 +13,7 @@ import { UIGeneric } from "../../internal/ui-generic/ui-generic.js";
  * @param option.classList - List of CSS class names.
  * @param option.attribute - Custom HTML attributes list.
  * @param option.label - label text.
+ * @param option.content - label text.
  *
  * @example
  * ```ts
@@ -35,6 +36,8 @@ export class UILabel extends UIGeneric {
         }
         if (option.label)
             this.element.textContent = option.label;
+        if (option.content)
+            this.element.textContent = option.content;
         if (option.attribute) {
             Object.entries(option.attribute).forEach(([name, value]) => {
                 this.element.setAttribute(name, String(value));

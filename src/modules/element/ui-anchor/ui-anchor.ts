@@ -9,6 +9,7 @@ export interface IUIAnchor {
     className?: string;
     attribute?: { name: string; value: string }[];
     label?: string;
+    content?: string;
     path: string;
 }
 
@@ -26,6 +27,7 @@ export interface IUIAnchor {
  * @param option.classList - List of CSS class names.
  * @param option.attribute - Custom HTML attributes.
  * @param option.label - Link label.
+ * @param option.content - content.
  * @param option.path - Route path.
  *
  * @example
@@ -59,6 +61,7 @@ export class UIAnchor extends UIGeneric {
         }
 
         if (option.label) this.element.textContent = option.label;
+        if (option.content) this.element.textContent = option.content;
 
         this.element.href = option.path;
 
@@ -74,9 +77,7 @@ export class UIAnchor extends UIGeneric {
 
             UIRouter.navigate(option.path);
         });
-    }
-
-    public label = (label: string): void => void (this.element.textContent = label);
+    };
 
     public path = (path: string): void => {
         this.element.href = path;

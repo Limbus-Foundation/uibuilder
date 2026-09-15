@@ -149,16 +149,17 @@ UIBuilder.body.render(routeButton2);
 // STORE
 // ------------------------------------------------------------
 
-const store = UIBuilder.store.set({
-    count: 3,
-    username: "rick"
+const st = UIBuilder.store;
+
+st.sector("user");   
+
+st.listenSector("user", (sector, key, value, compare) => {
+    if(compare("age", 18)) console.log("User age is 18");
 });
 
-UIBuilder.watcher.watch(store, value => {
-    console.log("Store:", value.count);
-});
+st.set("user","age",18);
 
-store.get.count++;
+console.log(st.get("user","age"))
 
 
 

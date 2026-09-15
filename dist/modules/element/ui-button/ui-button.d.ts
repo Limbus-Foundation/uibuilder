@@ -8,6 +8,7 @@ export interface IUIButton {
         value: string;
     }[];
     label?: string;
+    content?: string;
 }
 /**
  *
@@ -21,6 +22,7 @@ export interface IUIButton {
  * @param option.classList - List of CSS class names.
  * @param option.attribute - Custom HTML attributes list.
  * @param option.label - Button label
+ * @param option.content - Button label
  *
  * @example
  * ```ts

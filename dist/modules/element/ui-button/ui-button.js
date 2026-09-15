@@ -13,6 +13,7 @@ import { UIGeneric } from "../../internal/ui-generic/ui-generic.js";
  * @param option.classList - List of CSS class names.
  * @param option.attribute - Custom HTML attributes list.
  * @param option.label - Button label
+ * @param option.content - Button label
  *
  * @example
  * ```ts
@@ -33,13 +34,19 @@ export class UIButton extends UIGeneric {
         if (option.classList?.length) {
             this.element.classList.add(...option.classList);
         }
+        ;
         if (option.label)
             this.element.textContent = option.label;
+        if (option.content)
+            this.element.textContent = option.content;
         if (option.attribute) {
             Object.entries(option.attribute).forEach(([name, value]) => {
                 this.element.setAttribute(name, String(value));
             });
         }
+        ;
     }
+    ;
 }
+;
 //# sourceMappingURL=ui-button.js.map
