@@ -27,6 +27,7 @@ import { UIPanel } from "./modules/deprecated/ui-panel/ui-panel.js";
 import { UITextField } from './modules/deprecated/ui-text-field/ui-text-field.js';
 import { UIRouteButton } from "./modules/deprecated/ui-route-button/ui-route-button.js";
 import { UISwitcher } from "./modules/method/ui-switcher/ui-switcher.js";
+import { UIBridge } from "./modules/method/ui-bridge/ui-dridge.js";
 /**
  * ### UIBuilder
  *
@@ -531,6 +532,13 @@ export class UIBuilder {
      * @public
      */
     static style = (properties) => new UIStyle(properties);
+    /**
+     * Creates a bridge that groups named UI elements into a reusable object.
+     *
+     * @param UIElementList - A collection of UI elements identified by name.
+     * @returns A UIBridge containing the provided UI elements.
+     */
+    static bridge = (UIElementList) => new UIBridge(UIElementList);
     /**
      *
      * #### UIBody

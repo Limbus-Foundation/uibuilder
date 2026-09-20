@@ -42,6 +42,7 @@ import { IUIRouteButton, UIRouteButton } from "./modules/deprecated/ui-route-but
 import { UIElement } from "./modules/internal/ui-element/ui-element.js";
 import { UIRender } from "./modules/internal/ui-render/ui-render.js";
 import { UISwitcher } from "./modules/method/ui-switcher/ui-switcher.js";
+import { BridgeType, UIBridge } from "./modules/method/ui-bridge/ui-dridge.js";
 
 /**
  * ### UIBuilder 
@@ -570,6 +571,15 @@ export class UIBuilder {
      * @public
      */
     public static style = (properties: UIStyleProperties): UIStyle => new UIStyle(properties)
+
+    /** 
+     * Creates a bridge that groups named UI elements into a reusable object.
+     *
+     * @param UIElementList - A collection of UI elements identified by name.
+     * @returns A UIBridge containing the provided UI elements.
+     */
+    public static bridge = (UIElementList: BridgeType) : UIBridge => new UIBridge(UIElementList);
+    
 
     /**
      * 

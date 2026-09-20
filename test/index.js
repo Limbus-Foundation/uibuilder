@@ -2,7 +2,7 @@
 // UI BUILDER EXAMPLE : 
 
 import { UIBuilder } from "../dist/ui-builder.js";
-
+import { br } from "./bridge.js";
 
 
 // BASIC UI
@@ -228,3 +228,9 @@ UIBuilder.event(tabButton2).add("click", () => {
 UIBuilder.body.render(switcherRoot);
 UIBuilder.body.render(tabButton1);
 UIBuilder.body.render(tabButton2);
+
+const { frombridge } = br;
+
+UIBuilder.body.render(frombridge);
+
+frombridge.content("Hello from bridge");

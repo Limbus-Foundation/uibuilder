@@ -18,6 +18,7 @@ import { IUITextField, UITextField } from './modules/deprecated/ui-text-field/ui
 import { IUIRouteButton, UIRouteButton } from "./modules/deprecated/ui-route-button/ui-route-button.js";
 import { UIElement } from "./modules/internal/ui-element/ui-element.js";
 import { UISwitcher } from "./modules/method/ui-switcher/ui-switcher.js";
+import { BridgeType, UIBridge } from "./modules/method/ui-bridge/ui-dridge.js";
 /**
  * ### UIBuilder
  *
@@ -522,6 +523,13 @@ export declare class UIBuilder {
      * @public
      */
     static style: (properties: UIStyleProperties) => UIStyle;
+    /**
+     * Creates a bridge that groups named UI elements into a reusable object.
+     *
+     * @param UIElementList - A collection of UI elements identified by name.
+     * @returns A UIBridge containing the provided UI elements.
+     */
+    static bridge: (UIElementList: BridgeType) => UIBridge;
     /**
      *
      * #### UIBody
