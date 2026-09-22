@@ -1,1 +1,1 @@
-{"version":3,"file":"ui-dridge.js","sourceRoot":"","sources":["../../../../src/modules/method/ui-bridge/ui-dridge.ts"],"names":[],"mappings":"AACA,cAAc;AAMd,MAAM,OAAO,QAAQ;IAEjB,YAAY,aAAgB;QACxB,MAAM,CAAC,MAAM,CAAC,IAAI,EAAE,aAAa,CAAC,CAAC;IACvC,CAAC;IAAA,CAAC;CAEL;AAAA,CAAC"}
+{"version":3,"file":"ui-dridge.js","sourceRoot":"","sources":["../../../../src/modules/method/ui-bridge/ui-dridge.ts"],"names":[],"mappings":"AACA,cAAc;AAMd,MAAM,OAAO,QAAQ;IAEjB,YAAY,aAAyB;QACjC,MAAM,CAAC,MAAM,CAAC,IAAI,EAAE,aAAa,CAAC,CAAC;IACvC,CAAC;IAAA,CAAC;CAEL;AAAA,CAAC"}

@@ -578,7 +578,7 @@ export class UIBuilder {
      * @param UIElementList - A collection of UI elements identified by name.
      * @returns A UIBridge containing the provided UI elements.
      */
-    public static bridge = <T extends BridgeType>(UIElementList: T): UIBridge<T> & T => new UIBridge(UIElementList) as UIBridge<T> & T;
+    public static bridge = <T extends BridgeType>(UIElementList: T): T => new UIBridge(UIElementList) as T;
     
     /**
      * 
@@ -588,7 +588,7 @@ export class UIBuilder {
      *
      * @returns `UIBody`.
      *
-     * @see {@link UIBody}
+     * @see {@link UIBody} 
      * @see {@link UIBody.append}
      * @see {@link UIBody.prepend}
      * @public
