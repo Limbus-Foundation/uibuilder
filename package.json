@@ -1,6 +1,6 @@
 {
     "name": "@limbusfoundation/uibuilder",
-    "version": "1.8.7",
+    "version": "1.8.8",
     "description": "UI Builder is a library for building user interfaces using HTML elements. It provides a set of tools and components to create dynamic and interactive web applications.",
     "publishConfig": {
         "access": "public"
@@ -14,7 +14,7 @@
     "homepage": "https://uibuilderdoc.vercel.app/",
     "bugs": {
         "url": "https://github.com/Limbus-Foundation/uibuilder/issues"
-    }, 
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Limbus-Foundation/uibuilder.git"
