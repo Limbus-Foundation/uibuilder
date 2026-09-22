@@ -1,43 +1,43 @@
 {
-  "name": "@limbusfoundation/uibuilder",
-  "version": "1.8.7",
-  "description": "UI Builder is a library for building user interfaces using HTML elements. It provides a set of tools and components to create dynamic and interactive web applications.",
-  "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "uibuilder",
-    "ui",
-    "html-element",
-    "html"
-  ],
-  "homepage": "https://uibuilderdoc.vercel.app/",
-  "bugs": {
-    "url": "https://github.com/Limbus-Foundation/uibuilder/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Limbus-Foundation/uibuilder.git"
-  },
-  "license": "MIT",
-  "author": "Limbus Foundation",
-  "type": "commonjs",
-  "types": "./dist/ui-builder.d.ts",
-  "main": "./dist/ui-builder.js",
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "node example/index.js"
-  },
-  "devDependencies": {
-    "@types/node": "^26.1.1",
-    "typescript": "^7.0.2"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/ui-builder.d.ts",
-      "require": "./dist/ui-builder.js"
-    }
-  },
-  "dependencies": {}
+    "name": "@limbusfoundation/uibuilder",
+    "version": "1.8.7",
+    "description": "UI Builder is a library for building user interfaces using HTML elements. It provides a set of tools and components to create dynamic and interactive web applications.",
+    "publishConfig": {
+        "access": "public"
+    },
+    "keywords": [
+        "uibuilder",
+        "ui",
+        "html-element",
+        "html"
+    ],
+    "homepage": "https://uibuilderdoc.vercel.app/",
+    "bugs": {
+        "url": "https://github.com/Limbus-Foundation/uibuilder/issues"
+    }, 
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Limbus-Foundation/uibuilder.git"
+    },
+    "license": "MIT",
+    "author": "Limbus Foundation",
+    "type": "module",
+    "types": "./dist/ui-builder.d.ts",
+    "main": "./dist/ui-builder.js",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "node example/index.js"
+    },
+    "devDependencies": {
+        "@types/node": "^26.1.1",
+        "typescript": "^7.0.2"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/ui-builder.d.ts",
+            "import": "./dist/ui-builder.js"
+        }
+    },
+    "dependencies": {}
 }
