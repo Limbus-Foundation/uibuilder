@@ -33,5 +33,11 @@
     "@types/node": "^26.1.1",
     "typescript": "^7.0.2"
   },
+  "exports": {
+    ".": {
+        "types": "./dist/ui-builder.d.ts",
+        "require": "./dist/ui-builder.js"
+    }
+  },
   "dependencies": {}
 }

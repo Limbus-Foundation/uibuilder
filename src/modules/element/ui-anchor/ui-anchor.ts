@@ -7,7 +7,7 @@ export interface IUIAnchor {
     id?: string;
     classList?: string[];
     className?: string;
-    attribute?: { name: string; value: string }[];
+    attribute?: Record<string, string | number | boolean>;
     label?: string;
     content?: string;
     path: string;
@@ -65,10 +65,10 @@ export class UIAnchor extends UIGeneric {
 
         this.element.href = option.path;
 
-        if (option.attribute) {
-            for (const attribute of option.attribute) {
-                this.element.setAttribute(attribute.name, attribute.value);
-            }
+        if (option?.attribute) {
+            Object.entries(option.attribute).forEach(([name, value]) => {
+                this.element.setAttribute(name, String(value));
+            });
         }
 
         this.element.addEventListener("click", event => {

@@ -46,10 +46,10 @@ export class UIAnchor extends UIGeneric {
         if (option.content)
             this.element.textContent = option.content;
         this.element.href = option.path;
-        if (option.attribute) {
-            for (const attribute of option.attribute) {
-                this.element.setAttribute(attribute.name, attribute.value);
-            }
+        if (option?.attribute) {
+            Object.entries(option.attribute).forEach(([name, value]) => {
+                this.element.setAttribute(name, String(value));
+            });
         }
         this.element.addEventListener("click", event => {
             event.preventDefault();

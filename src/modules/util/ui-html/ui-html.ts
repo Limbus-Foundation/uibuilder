@@ -50,10 +50,10 @@ export class UIHtml {
 
         const parsedHTMLElement = new UICustom({
             tag: element.tagName.toLowerCase() as keyof HTMLElementTagNameMap,
-            id : element.id,
-            className : element.classList.value,
+            id: element.id,
+            className: element.classList.value,
             content: element.textContent ?? "",
-            attribute : Array.from(element.attributes).map(attribute => ({ name: attribute.name, value: attribute.value }))
+            attribute: Object.fromEntries(Array.from(element.attributes).map(attribute => [attribute.name, attribute.value]))
         });
 
         element.replaceWith(parsedHTMLElement.__get());

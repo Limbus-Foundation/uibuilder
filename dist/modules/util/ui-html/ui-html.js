@@ -46,7 +46,7 @@ export class UIHtml {
             id: element.id,
             className: element.classList.value,
             content: element.textContent ?? "",
-            attribute: Array.from(element.attributes).map(attribute => ({ name: attribute.name, value: attribute.value }))
+            attribute: Object.fromEntries(Array.from(element.attributes).map(attribute => [attribute.name, attribute.value]))
         });
         element.replaceWith(parsedHTMLElement.__get());
         return parsedHTMLElement;

@@ -3,10 +3,7 @@ export interface IUIImage {
     id?: string;
     classList?: string[];
     className?: string;
-    attribute?: {
-        name: string;
-        value: string;
-    }[];
+    attribute?: Record<string, string | number | boolean>;
     src?: string;
 }
 /**

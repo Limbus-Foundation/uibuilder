@@ -3,10 +3,7 @@ export interface IUIButton {
     id?: string;
     classList?: string[];
     className?: string;
-    attribute?: {
-        name: string;
-        value: string;
-    }[];
+    attribute?: Record<string, string | number | boolean>;
     label?: string;
     content?: string;
 }
