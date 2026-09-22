@@ -566,11 +566,11 @@ export class UIBuilder {
      * @param CSSStyleDeclaration
      * 
      * @returns `CSSStyleDeclaration`. 
-     *
+     * 
      * @see {@link UIStyle}
      * @public
      */
-    public static style = (properties: UIStyleProperties): UIStyle => new UIStyle(properties)
+    public static style = (properties: UIStyleProperties): UIStyle => new UIStyle(properties) 
 
     /** 
      * Creates a bridge that groups named UI elements into a reusable object.
@@ -578,11 +578,11 @@ export class UIBuilder {
      * @param UIElementList - A collection of UI elements identified by name.
      * @returns A UIBridge containing the provided UI elements.
      */
-    public static bridge = <T extends BridgeType>(UIElementList: T): UIBridge<T> => new UIBridge(UIElementList);
+    public static bridge = <T extends BridgeType>(UIElementList: T): UIBridge<T> & T => new UIBridge(UIElementList) as UIBridge<T> & T;
     
     /**
      * 
-     * #### UIBody
+     * #### UIBody 
      * 
      * Return a reference to the `<body>` via `UIBody`.
      *
