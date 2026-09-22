@@ -1,6 +1,6 @@
 {
   "name": "@limbusfoundation/uibuilder",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "description": "UI Builder is a library for building user interfaces using HTML elements. It provides a set of tools and components to create dynamic and interactive web applications.",
   "publishConfig": {
     "access": "public"
@@ -35,8 +35,8 @@
   },
   "exports": {
     ".": {
-        "types": "./dist/ui-builder.d.ts",
-        "require": "./dist/ui-builder.js"
+      "types": "./dist/ui-builder.d.ts",
+      "require": "./dist/ui-builder.js"
     }
   },
   "dependencies": {}
