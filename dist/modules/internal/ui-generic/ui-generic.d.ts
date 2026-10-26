@@ -4,6 +4,7 @@ import { UIElement } from "../ui-element/ui-element.js";
 import { UIStyle, UIStyleProperties } from "../../method/ui-style/ui-style.js";
 export declare class UIGeneric {
     private htmlElement;
+    private UIElementRenderList;
     private renderedPlace;
     private genericData;
     protected isRendered: boolean;
@@ -30,6 +31,16 @@ export declare class UIGeneric {
     replaceRender: (newUIElement: UIElement, oldUIElement: UIElement) => void;
     render: (element: UIElement | UIBlend, organization?: UIRenderOrganization) => void;
     replaceSelfRender: (element: UIElement) => void;
+    /**
+     * #### clearRender();
+     *
+     * clear all rendered elements within
+     *
+     * @see {@link UIGeneric.clearRender}
+     *
+     * @public
+     */
+    clearRender: () => void;
     unrender: (element: UIElement | UIBlend) => void;
     listenRender: (callback: () => void) => void;
     listenUnrender: (callback: () => void) => void;

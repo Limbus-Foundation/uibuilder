@@ -16,6 +16,7 @@ interface IGenericData {
 export class UIGeneric {
 
     private htmlElement: HTMLElement;
+    private UIElementRenderList : UIElement[] = [];
 
     private renderedPlace : HTMLElement | null = null;
     private genericData : IGenericData = {
@@ -98,11 +99,44 @@ export class UIGeneric {
     };
 
     public render = (element: UIElement | UIBlend, organization: UIRenderOrganization = "below"): void => {
+        
         new UIRender(this.htmlElement, element, organization);
+
+        if(element instanceof UIBlend){
+            this.UIElementRenderList.push(...element);
+            return;
+        };
+
+        this.UIElementRenderList.push(element);
     };
 
     public replaceSelfRender = (element: UIElement): void => {
         this.htmlElement.replaceWith(element.__get());
+    };
+
+
+    /**
+     * #### clearRender();
+     * 
+     * clear all rendered elements within
+     * 
+     * @see {@link UIGeneric.clearRender}
+     *
+     * @public
+     */
+    public clearRender = (): void => {
+
+        for (const el of this.UIElementRenderList) {
+
+            if (el.__getIsRendered() === false || el.__get().parentElement !== this.htmlElement) continue;
+
+            this.htmlElement.removeChild(el.__get());
+            el.__setRenderedPlace(null);
+            el.__invokeListenUnrender();
+            
+        };
+
+        this.UIElementRenderList = [];
     };
 
      /**
@@ -154,19 +188,22 @@ export class UIGeneric {
     public unrender = (element: UIElement | UIBlend): void => {
 
         if (element instanceof UIBlend) {
+
             for (const el of element) {
+
                 if (el.__getIsRendered() === false) {
                     console.warn("UIBuilder > Element " + el.__get().tagName.toLowerCase() + " cannot be unrendered because it is not rendered!");
-                    return;
+                    continue;
                 };
 
                 this.htmlElement.removeChild(el.__get());
-                el.__setRenderedPlace(null)
+                el.__setRenderedPlace(null);
                 el.__invokeListenUnrender();
+                this.UIElementRenderList = this.UIElementRenderList.filter(item => item !== el);
             };
 
             return;
-        }; 
+        };
 
         if (element.__getIsRendered() === false) {
             console.warn("UIBuilder > Element " + element.__get().tagName.toLowerCase() + " cannot be unrendered because it is not rendered!");
@@ -176,7 +213,8 @@ export class UIGeneric {
         this.htmlElement.removeChild(element.__get());
         element.__setRenderedPlace(null);
         element.__invokeListenUnrender();
-    }; 
+        this.UIElementRenderList = this.UIElementRenderList.filter(item => item !== element);
+    };
 
     public listenRender = (callback: () => void): void => {
         this.renderCallbacks.push(callback);

@@ -5,6 +5,7 @@ import { UIStyle } from "../../method/ui-style/ui-style.js";
 ;
 export class UIGeneric {
     htmlElement;
+    UIElementRenderList = [];
     renderedPlace = null;
     genericData = {
         id: "",
@@ -71,9 +72,35 @@ export class UIGeneric {
     };
     render = (element, organization = "below") => {
         new UIRender(this.htmlElement, element, organization);
+        if (element instanceof UIBlend) {
+            this.UIElementRenderList.push(...element);
+            return;
+        }
+        ;
+        this.UIElementRenderList.push(element);
     };
     replaceSelfRender = (element) => {
         this.htmlElement.replaceWith(element.__get());
+    };
+    /**
+     * #### clearRender();
+     *
+     * clear all rendered elements within
+     *
+     * @see {@link UIGeneric.clearRender}
+     *
+     * @public
+     */
+    clearRender = () => {
+        for (const el of this.UIElementRenderList) {
+            if (el.__getIsRendered() === false || el.__get().parentElement !== this.htmlElement)
+                continue;
+            this.htmlElement.removeChild(el.__get());
+            el.__setRenderedPlace(null);
+            el.__invokeListenUnrender();
+        }
+        ;
+        this.UIElementRenderList = [];
     };
     /**
     * #### __invokeListenRender();
@@ -125,12 +152,13 @@ export class UIGeneric {
             for (const el of element) {
                 if (el.__getIsRendered() === false) {
                     console.warn("UIBuilder > Element " + el.__get().tagName.toLowerCase() + " cannot be unrendered because it is not rendered!");
-                    return;
+                    continue;
                 }
                 ;
                 this.htmlElement.removeChild(el.__get());
                 el.__setRenderedPlace(null);
                 el.__invokeListenUnrender();
+                this.UIElementRenderList = this.UIElementRenderList.filter(item => item !== el);
             }
             ;
             return;
@@ -144,6 +172,7 @@ export class UIGeneric {
         this.htmlElement.removeChild(element.__get());
         element.__setRenderedPlace(null);
         element.__invokeListenUnrender();
+        this.UIElementRenderList = this.UIElementRenderList.filter(item => item !== element);
     };
     listenRender = (callback) => {
         this.renderCallbacks.push(callback);

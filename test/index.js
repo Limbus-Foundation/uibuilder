@@ -25,7 +25,6 @@ UIBuilder.body.render(label);
 UIBuilder.body.render(range);
 
 
-
 // EVENTS
 // ------------------------------------------------------------
 
@@ -201,6 +200,16 @@ UIBuilder.body.style(bodyStyle);
 
 const switcherRoot = UIBuilder.group({});
 
+const testClear = UIBuilder.label({ label: "Test Clear" });
+const testClear2 = UIBuilder.label({ label: "Test Clear" });
+
+switcherRoot.render(UIBuilder.blend(testClear, testClear2));
+
+setTimeout(() => { 
+    switcherRoot.clearRender();
+    console.log("Switcher root cleared");
+}, 3000);
+
 switcherRoot.style({
     width: "400px",
     height: "400px",
@@ -221,7 +230,7 @@ switcher.register(tab1).register(tab2);
 
 UIBuilder.event(tabButton1).add("click", () => switcher.switch(tab1));
 UIBuilder.event(tabButton2).add("click", () => {
-    switcher.switch(tab2)
+    switcher.switch(tab2);
     console.log("current tab:", switcher.current());
 });
 
